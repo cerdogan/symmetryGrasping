@@ -15,6 +15,13 @@ Paper XXX
 
 \maketitle
 
+%% IDEAS
+% - force map instead of collision map
+% - invariance of height?
+% - projection of fingers convex ?
+% - add 3rd dimension (saturation)?
+
+
 \begin{abstract}
 In this, paper we introduce an efficient representation for robot grasping that exploits symmetry
 properties of objects. The new representation forms a low-dimensional manifold, which can be used to
@@ -24,6 +31,103 @@ manipulation planning. We apply the introduced representation and planner to bi-
 in humanoid robots.
 \end{abstract}
 
+% representation (high level / abstract)
+% manifold (2 dimensional thing)
+
 \section{Introduction}
+
+\begin{enumerate}
+\item What is paper about?
+	\begin{enumerate}
+	\item Robots are required for assisting in collaborative tasks
+	\item Especially physical taks, e.g., domestic environments, healthcare, 
+		  defense, manufacturing 
+	\item Robots need manipulation and grasping capabilities (one of most 
+		  important behaviors)
+	\item Grasping is at the heart of planning physical tasks 
+	\end{enumerate}
+
+\item What is the problem?
+	\begin{enumerate}
+	\item Grasp planning taking into account environment and task constraints
+	\item Current grasp representations are based on a floating hand, which only 					  represents the end-effector and ignores embodiment of whole robot in
+		  environment. As a result, infeasible grasps are generated and have to be
+		  pruned out in a post-processing step. 
+	\item Well established algorithms assume only one action, and do not include
+		  foresight and reasoning about next actions to perform. Example, pouring
+		  into a cup. Example, putting mug into washing machine.
+	\item Motion planning with multiple subtasks -> planning needs to be fast 
+		  as possible (complexity)
+	\item !Try to show that separation of planning and grasp selection is naive
+	\item Especially in bi-manual, sequential and co-worker scenarios, complexity increases
+	\end{enumerate}
+	
+\item What is our approach?
+	\begin{enumerate}
+	\item Reoccurring patterns in the geometry of shapes can be exploited
+	\item Rotational and linear symmetries and extrusions can be exploited
+	\item In this paper we focus on rotational symmetries
+	
+	\item Object-centered representation
+	\item Project world and hand information into the representation, thereby taking
+		  into account reachability and collisions
+	\item Examples, picture of symm. object with two hands and hands are projected 
+		  into manifold.
+	\item The symmetric nature of the objects allows us to update our representation
+		  as the object rotated around the axis of symmetry.
+\end{enumerate}
+\item Advantages of approach?
+	\begin{enumerate}
+	\item We will show that this basic property leads to a significant reduction of 
+		  search complexity in grasp planning
+	\item \emph{Since the object is symmetric any stable grasp can be rotated around the axis
+		  yielding a family of feasible grasps}.
+	\item Specifically, this property allows us to generate multiple grasps around 
+		  the object which is useful for bimanual and cooperative robot hand over 
+		  tasks. In addition, it allows us to plan a single grasp for a sequence of tasks.
+	\item We use this approach to generate grasps for a set of scenarios involving
+		  sequential, bimanual and collaborative components. 
+	\end{enumerate}
+	
+\item Contributions?
+	\begin{enumerate}
+	\item new representation for efficient parameterization of stable grasps 	
+	\item discussion of properties of representation induced by symmetric objects
+	\item a grasp planning algorithms using representation to achieve sequential and 
+		  bimanual tasks  
+	\end{enumerate}
+	\end{enumerate}
+	
+\section{Related Work}
+
+\section{Manifold Representations for Rotationally Symmetric Objects}
+% name it!
+% symmetry and invariance
+% Pic1: example of cup rotating
+% Pic2: handprint picture (3 fingers)
+% Pic3: multiple hand rotations around object (wine bottle)
+
+\section{Task Planning with Grasp Manifolds}
+% Pic4: two tasks superimposed on top of each other (manifold pictures and simulation)
+% Pic5: pose of the second task changes (object rotation)
+ 
+\subsection{Planning for Task Sequences}
+% Pic6: Rod through 3 tasks
+% Pic6.5: Sequence of 3 tasks in simulation
+
+\subsection{Planning for Bi-Manual and Cooperative Tasks}
+% Pic7: Hand prints of two robots
+% Pic8: Picture of two robots in front of each other, hand over
+
+\section{Experiments}
+% offline experiment: how fast is map generation? 
+% online experiment: how fast is sequence generation?
+% quality? how good? alternative solutions?
+% Pic8: 3D blob
+% 2 different domains
+ 
+\section{Discussion}
+
+\section{Conclusions}
 
 \end{document}
