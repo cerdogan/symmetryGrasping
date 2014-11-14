@@ -12,6 +12,8 @@
 Paper XXX
 }
 
+\newcommand{\vech}[1]{\textbf{#1}}
+\newcommand{\set}[1]{\textbf{#1}}
 
 \maketitle
 
@@ -101,8 +103,65 @@ in humanoid robots.
 \section{Related Work}
 
 \section{Manifold Representations for Rotationally Symmetric Objects}
+% cyclic manifold 
+\begin{enumerate}
+	\item Define frames $L$ and $G$ as local object frame and global frame
+	\begin{enumerate}
+		\item 
+		Let $\vech{z}$ be the axis of symmetry, $\vech{o}$ be the origin, and $\vech{a}$ be the polar axis of the object.The polar axis lies in the reference plane of the object and is perpendicular to $\vech{z}$. In the following, we assume that the reference plane is the base of object. Note that $\vech{a}$ can be arbitrarily chosen, since the object is symmetric. Using $\vech{z}$, $\vech{a}$ and their crossproduct we can form a local coordinate frame $L$ for an object.
+		
+		\item Any point $\vech{p} = [x,y,z]^T$ in the local coordinate frame $L$, can also be represented using a cylindrical parametrization of the coordinate system. 
+		
+		\item This parametrization leads to a point $[h, r, \theta]^T$ whose components correspond to the height, radius and angle respectively. The height is measured along the axis of symmetry $\vech{z}$, the radius $r$ is the distance between $\vech{p}$ and $\vech{z}$, the angle $\theta$ is the angle between $\vech{a}$ and the projection of $\vech{p} $ onto the local reference plane of the object as can be seen in Fig.~\ref{}. 
+		
+		\item In the following, we define the radius as a function $r(h)$ of the height, which leads to a two-dimensional parametrization $[h, \theta] \in \mathbb{S}$ of point $\vec{p}$. Subsequently, we can define the function $f: \mathbb{S} \rightarrow \mathbb{R}^3$ that maps the cylindrical coordinates to the 3D local coordinates in the following way:
+		
+		\begin{equation}
+			f(\vech{x}) = f([h, \theta]) = [r(h) ~ cos(\theta), r(h) ~ sin(\theta), h]
+		\end{equation}
+		
+		\item Similarly, we can map from the 3D local coordinate space $L$ to the 
+		surface manifold using the inverse mapping, $f^{-1}: \mathbb{R}^3 \rightarrow \mathbb{S}$:
+		
+		\begin{equation}
+			f^{-1}(\vech{p}) = f^{-1}([x,y,z]) = [z, atan2(y,x)]
+		\end{equation}
+		
+		\item Wrap up: Having defined the forward and backward mappings, now we can discuss how this is useful.
+	\end{enumerate}
+	
+	\item Parametrizing Grasps using Low Dimensional Manifolds
+	\begin{enumerate}
+		
+		\item In this section, we demonstrate how to exploit the introduced representation and the symmetry properties of the object to efficiently sample feasible grasps. The key insight is that stable grasps can be rotated around the axis of symmetry without having to modify the hand shape. 
+			
+		\item We begin the analysis with a simplified grasping model where a point
+		on the surface corresponds wrist position during grasping. The hand is assumed to be parallel to the base of the object such that the plane between the grasping fingers is perpendicular to the axis of symmetry. 
+
+		\item The goal is to identify the set of feasible points the robot can grasp. This requires reasoning about reachability and collisions, where we need to ensure that there is a collision-free arm pose with the wrist touching the respective surface point. To sample this space, we propose discretizing the manifold by fixed step sizes for the height $h$ and the angle $\theta$. Refer to picture.
+		
+		\item For each patch of the discretized manifold, using the center point 
+		as the reference for the wrist, we attempt to compute a collision-free 		inverse kinematics solution. Refer to picture again showing red/blue and which collisions were caused. 
+		
+		
+	\end{enumerate}
+	
+	\item Low-dimensional manifold for grasps on symmetric objects	
+	\begin{enumerate}
+	\item Let $\vech{x} \in \set{S}, where \vech{x} = [h, \theta]^T$
+	\item $h$ is the height of the contact point along the axis of symmetry
+	\item $r$
+	\end{enumerate}
+
+\end{enumerate}
+
 % name it!
+% unwrapping introduces a nonlinear warping
+%
+
 % symmetry and invariance
+% Pic0a: wiki cylinder parameterization
+% Pic0b: discretization and red/blue stuff
 % Pic1: example of cup rotating
 % Pic2: handprint picture (3 fingers)
 % Pic3: multiple hand rotations around object (wine bottle)
@@ -127,6 +186,8 @@ in humanoid robots.
 % 2 different domains
  
 \section{Discussion}
+% this representation introduces warping effects
+% talk about variable radius objects (picture)
 
 \section{Conclusions}
 
