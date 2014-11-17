@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="New document 1">
+   sodipodi:docname="cylindricalCS.svg">
   <defs
      id="defs4">
     <marker
@@ -53,9 +53,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="-61.165133"
-     inkscape:cy="64.778509"
+     inkscape:zoom="2.0000001"
+     inkscape:cx="71.365802"
+     inkscape:cy="104.29562"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -76,7 +76,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -154,7 +154,7 @@
        transform="matrix(0.87749394,0,0,1.012493,45.362718,-2.1953536)" />
     <text
        xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:14px;font-style:italic;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif Italic;font-stretch:normal;font-variant:normal"
        x="352.52817"
        y="278.15509"
        id="text5274"
@@ -165,7 +165,7 @@
          y="278.15509"> θ</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:14px;font-style:italic;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif Italic;font-stretch:normal;font-variant:normal"
        x="284.17282"
        y="265.50787"
        id="text5274-8"
@@ -176,7 +176,7 @@
          y="265.50787"> r</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:14px;font-style:italic;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif Italic;font-stretch:normal;font-variant:normal"
        x="367.77411"
        y="217.26172"
        id="text5274-8-7"
@@ -187,7 +187,7 @@
          y="217.26172"> h</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Serif;-inkscape-font-specification:Serif Italic"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif Italic"
        x="381.42422"
        y="178.0397"
        id="text5274-8-7-0"
@@ -195,17 +195,41 @@
          sodipodi:role="line"
          id="tspan5276-8-9-2"
          x="381.42422"
-         y="178.0397"> [h,r,θ]</tspan></text>
+         y="178.0397"> [h, r, θ]</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:10px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Serif;-inkscape-font-specification:Serif Italic"
+       style="font-size:10px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif Italic"
        x="428.50671"
-       y="171.30713"
+       y="171.80713"
        id="text5341"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5343"
          x="428.50671"
-         y="171.30713">T</tspan></text>
+         y="171.80713">T</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif Bold Italic"
+       x="297.03305"
+       y="142.86353"
+       id="text5274-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5276-0"
+         x="297.03305"
+         y="142.86353"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif Bold Italic"> z</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif Bold Italic"
+       x="232.62148"
+       y="297.73309"
+       id="text5274-4-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5276-0-2"
+         x="232.62148"
+         y="297.73309"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif Bold Italic"> a</tspan></text>
   </g>
 </svg>

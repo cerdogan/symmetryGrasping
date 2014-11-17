@@ -1,4 +1,6 @@
 \documentclass{aamas2015}
+\usepackage{amsmath}
+
 \pdfpagewidth=8.5truein
 \pdfpageheight=11truein
 
@@ -77,73 +79,123 @@ subtasks or several interacting agents. Planning grasps for such
 tasks can rapidly become computationally infeasible due to a large
 search space. The key insight of this paper is that re-occurring
 patterns in the geometry of shapes can be exploited to drastically
-reduce the space of solutions. We will introduce an object-centered
-representation for grasp planning which is based on rotational symmetries.
+reduce the space of solutions. We will introduce an low-dimensional, 
+object-centered representation for grasp planning which is based on rotational symmetries.
 The symmetric nature of the objects allows us to update our representation
 as the object rotated around the axis of symmetry. \emph{Since the object is symmetric any stable grasp can be rotated around the axis yielding a family of feasible grasps}. We will show that this basic property leads to a significant reduction of search complexity in grasp planning. Specifically, this property allows us to generate multiple grasps around the object which is useful for bi-manual tasks and cooperative robot hand over tasks. In addition, it allows us to identify a single grasp that is useful for a sequence of tasks.
 
 
 
-
-	
-
-\item Advantages of approach?
-	\begin{enumerate}
-	\item 
-	
-\item Contributions?
-	\begin{enumerate}
-	\item new representation for efficient parameterization of stable grasps 	
-	\item discussion of properties of representation induced by symmetric objects
-	\item a grasp planning algorithms using representation to achieve sequential and 
-		  bimanual tasks  
-	\end{enumerate}
-	\end{enumerate}
-	
-	
-
-\begin{enumerate}
-\item What is paper about?
-	\begin{enumerate}
-	\item Robots are required for assisting in collaborative tasks
-	\item Especially physical taks, e.g., domestic environments, healthcare, 
-		  defense, manufacturing 
-	\item Robots need manipulation and grasping capabilities (one of most 
-		  important behaviors)
-	\item Grasping is at the heart of planning physical tasks 
-	\end{enumerate}
-
-\item What is the problem?
-	\begin{enumerate}
-	\item Grasp planning taking into account environment and task constraints
-	\item Current grasp representations are based on a floating hand, which only 					  represents the end-effector and ignores embodiment of whole robot in
-		  environment. As a result, infeasible grasps are generated and have to be
-		  pruned out in a post-processing step. 
-	\item Well established algorithms assume only one action, and do not include
-		  foresight and reasoning about next actions to perform. Example, pouring
-		  into a cup. Example, putting mug into washing machine.
-	\item Motion planning with multiple subtasks -> planning needs to be fast 
-		  as possible (complexity)
-	\item !Try to show that separation of planning and grasp selection is naive
-	\item Especially in bi-manual, sequential and co-worker scenarios, complexity increases
-	\end{enumerate}
-	
-\item What is our approach?
-	\begin{enumerate}
-	\item Reoccurring patterns in the geometry of shapes can be exploited
-	\item Rotational and linear symmetries and extrusions can be exploited
-	\item In this paper we focus on rotational symmetries
-	
-	\item Object-centered representation
-	\item Project world and hand information into the representation, thereby taking
-		  into account reachability and collisions
-	\item Examples, picture of symm. object with two hands and hands are projected 
-		  into manifold.
-	\item 
-\end{enumerate}
+%
+%	
+%
+%\item Advantages of approach?
+%	\begin{enumerate}
+%	\item 
+%	
+%\item Contributions?
+%	\begin{enumerate}
+%	\item new representation for efficient parameterization of stable grasps 	
+%	\item discussion of properties of representation induced by symmetric objects
+%	\item a grasp planning algorithms using representation to achieve sequential and 
+%		  bimanual tasks  
+%	\end{enumerate}
+%	\end{enumerate}
+%	
+%	
+%
+%\begin{enumerate}
+%\item What is paper about?
+%	\begin{enumerate}
+%	\item Robots are required for assisting in collaborative tasks
+%	\item Especially physical taks, e.g., domestic environments, healthcare, 
+%		  defense, manufacturing 
+%	\item Robots need manipulation and grasping capabilities (one of most 
+%		  important behaviors)
+%	\item Grasping is at the heart of planning physical tasks 
+%	\end{enumerate}
+%
+%\item What is the problem?
+%	\begin{enumerate}
+%	\item Grasp planning taking into account environment and task constraints
+%	\item Current grasp representations are based on a floating hand, which only 					  represents the end-effector and ignores embodiment of whole robot in
+%		  environment. As a result, infeasible grasps are generated and have to be
+%		  pruned out in a post-processing step. 
+%	\item Well established algorithms assume only one action, and do not include
+%		  foresight and reasoning about next actions to perform. Example, pouring
+%		  into a cup. Example, putting mug into washing machine.
+%	\item Motion planning with multiple subtasks -> planning needs to be fast 
+%		  as possible (complexity)
+%	\item !Try to show that separation of planning and grasp selection is naive
+%	\item Especially in bi-manual, sequential and co-worker scenarios, complexity increases
+%	\end{enumerate}
+%	
+%\item What is our approach?
+%	\begin{enumerate}
+%	\item Reoccurring patterns in the geometry of shapes can be exploited
+%	\item Rotational and linear symmetries and extrusions can be exploited
+%	\item In this paper we focus on rotational symmetries
+%	
+%	\item Object-centered representation
+%	\item Project world and hand information into the representation, thereby taking
+%		  into account reachability and collisions
+%	\item Examples, picture of symm. object with two hands and hands are projected 
+%		  into manifold.
+%	\item 
+%\end{enumerate}
 \section{Related Work}
 
-\section{Manifold Representations for Rotationally Symmetric Objects}
+\section{Manifold Representations \\for Rotationally Symmetric \\Objects}
+In this section we will introduce a low-dimensional representation for grasp 
+planning on rotationally symmetric objects. The main idea is to project
+the surface of the object onto a two-dimensional manifold, where each
+point on the manifold corresponds to a possible grasp of the robot. Planning
+can then be performed by identifying a point on this manifold which fulfills
+all task constraints.
+
+\subsection{Cylindrical Parametrization of \\Surface Points}
+The manifold representation which will be discussed in the remainder of the paper is based
+on a cylindrical coordinate system. We will therefore start by introducing cylindrical
+coordinates. 
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{./images/cylindricalCS.pdf} \quad
+  \end{center}
+  \caption{A cylindrical coordinate system used to parameterize points on the
+  surface of a rotationally symmetric object. The axis $\vech{a}$ corresponds to the polar axis, while $\vech{h}$ is the axis of symmetry. Any point on the surface can be represented using height $h$, radius $r$, and angle $\theta$. \label{fig:cylindricalcs}}
+\end{figure}
+ 
+Let $\vech{z}$ be the axis of symmetry, $\vech{o}$ be the origin, and $\vech{a}$ be the polar axis of the object. The polar axis lies in the reference plane of the object and is perpendicular to $\vech{z}$. Subsequently, we assume that the reference plane is the base of object. Note that $\vech{a}$ can be arbitrarily chosen, since the object is symmetric. Using $\vech{z}$, $\vech{a}$ and their crossproduct we can form a local coordinate frame $L$ for an object. Any point $\vech{p} = [x,y,z]^T$ in the local coordinate frame $L$, can also be represented using a cylindrical parametrization of the coordinate system. This parametrization leads to a point $[h, r, \theta]^T$ whose components correspond to the height, radius and angle of the point respectively as seen in Fig.~\ref{fig:cylindricalcs}. The height is measured along the axis of symmetry $\vech{z}$, the radius $r$ is the distance between $\vech{p}$ and $\vech{z}$, the angle $\theta$ is the angle between $\vech{a}$ and the projection of $\vech{p} $ onto the local reference plane of the object as can be seen in Fig.~\ref{fig:cylindricalcs}. 
+
+In the following, we define the radius as a function $r(h)$ of the height, which results in a two-dimensional parametrization $[h, \theta]^T \in \mathbb{S}$ of point $\vech{p}$. Subsequently, we can define the function $f: \mathbb{S} \rightarrow \mathbb{R}^3$ that maps the cylindrical coordinates to the 3D local coordinates in the following way:
+		
+		
+\begin{equation}
+	f(\vech{x}) = f([h, \theta]^T) = \left[ 
+	\begin{array}{c}
+	(h) ~ cos(\theta) \\ r(h) ~ sin(\theta)\\ h 
+	\end{array} \right]. 
+\end{equation}
+		
+Similarly, we can map from the 3D local coordinate space $L$ back to the 
+surface manifold using the inverse mapping, $f^{-1}: \mathbb{R}^3 \rightarrow \mathbb{S}$:
+\begin{equation}
+	f^{-1}(\vech{p}) = f^{-1}([x,y,z]^T) = \left[ \begin{array}{c} z \\ atan2(y,x) \end{array}\right].
+\end{equation}
+The assumption of rotational symmetry along with the definition of the radius as a function of the height reduces the our parametrization to two variables. Fig.~\ref{} depicts the mapping of a 3D cylinder onto the 2D manifold. In the next section, we will see how this can exploited for generating grasps.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=0.45\textwidth]{./images/unfolding.pdf} \quad
+  \end{center}
+  \caption{The points on the 3D surface (right) are projected onto a two-dimensional manifold using a cylindrical coordinate system.\label{fig:unfolding}}
+\end{figure}
+
+\subsection{Grasp Manifold}
+ In this section, we demonstrate how to exploit the introduced representation and the symmetry properties of the object to efficiently sample feasible grasps. The key insight is that stable grasps can be rotated around the axis of symmetry without having to modify the hand shape. We begin the analysis with a simplified grasping model where a point on the surface corresponds wrist position during grasping. The hand is assumed to be parallel to the base of the object such that the plane between the grasping fingers is perpendicular to the axis of symmetry. The goal is to identify the set of feasible points the robot can grasp. This requires reasoning about reachability and collisions, where we need to ensure that there is a collision-free arm pose with the wrist touching the respective surface point. To sample this space, we propose discretizing the manifold by fixed step sizes for the height $h$ and the angle $\theta$. Refer to picture. For each patch of the discretized manifold, using the center point  as the reference for the wrist, we attempt to compute a collision-free inverse kinematics solution. Refer to picture again showing red/blue and which collisions were caused. An interesting property of this representation is that the produced map can be efficiently updated when the object is rotated around its axis of symmetry. More specifically, a rotation around the z-axis corresponds to a shift along the $\theta$ dimension. 
+
+
 % cyclic manifold 
 \begin{enumerate}
 	\item Define frames $L$ and $G$ as local object frame and global frame
