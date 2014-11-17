@@ -22,6 +22,7 @@ Paper XXX
 % - invariance of height?
 % - projection of fingers convex ?
 % - add 3rd dimension (saturation)?
+% - changing circle size by cutting through a cone. Allows for change in height.
 
 
 \begin{abstract}
@@ -37,6 +38,69 @@ in humanoid robots.
 % manifold (2 dimensional thing)
 
 \section{Introduction}
+Robots with advanced dexterous capabilities have the potential
+to revolutionize important application domains such as 
+healthcare, security, or manufacturing. Whether it is in 
+structured environments such as factories, or unstructured 
+environments such as homes, grasping is often the first 
+step in the physical interaction between a robot and 
+its surroundings. The generation of grasps on objects 
+is therefore at the heart of planning physical tasks.
+However, to date, most grasp planning methods are mainly 
+focused on generating physically stable grasps, without
+incorporating immediate or future task constraints. 
+
+Many well established algorithms assume only a single action, 
+and do not include foresight and reasoning about next 
+actions. However, when picking up a mug, it is 
+important to select a grasp that facilitates
+the next action to be performed. In case the next action 
+is a pouring motion, the robot needs avoid grasps that would 
+cover the rim of the object. In contrast, if any of the 
+next actions involves placing the mug on the table, the 
+robot cannot choose any grasp in which fingers touch 
+the mug's base. To date, many grasp representations 
+are based on a floating hand representing only the 
+end-effector and ignoring the embodiment of the 
+entire robot in environment. As a result, infeasible grasps 
+are generated and have to be pruned out in a post-processing 
+step. Yet, selecting grasps that facilitate task completion is 
+particularly important for bi-manual, sequential, 
+and co-worker scenarios. In these scenarios, grasps
+need to be carefully chosen, such that they do not violate
+constraints imposed by a second arm, a human interaction
+partner, or a future action. 
+
+In this paper, we address the issue of manipulation planning with task
+constraints. We are particularly interested in tasks that involve several
+subtasks or several interacting agents. Planning grasps for such 
+tasks can rapidly become computationally infeasible due to a large
+search space. The key insight of this paper is that re-occurring
+patterns in the geometry of shapes can be exploited to drastically
+reduce the space of solutions. We will introduce an object-centered
+representation for grasp planning which is based on rotational symmetries.
+The symmetric nature of the objects allows us to update our representation
+as the object rotated around the axis of symmetry. \emph{Since the object is symmetric any stable grasp can be rotated around the axis yielding a family of feasible grasps}. We will show that this basic property leads to a significant reduction of search complexity in grasp planning. Specifically, this property allows us to generate multiple grasps around the object which is useful for bi-manual tasks and cooperative robot hand over tasks. In addition, it allows us to identify a single grasp that is useful for a sequence of tasks.
+
+
+
+
+	
+
+\item Advantages of approach?
+	\begin{enumerate}
+	\item 
+	
+\item Contributions?
+	\begin{enumerate}
+	\item new representation for efficient parameterization of stable grasps 	
+	\item discussion of properties of representation induced by symmetric objects
+	\item a grasp planning algorithms using representation to achieve sequential and 
+		  bimanual tasks  
+	\end{enumerate}
+	\end{enumerate}
+	
+	
 
 \begin{enumerate}
 \item What is paper about?
@@ -75,31 +139,8 @@ in humanoid robots.
 		  into account reachability and collisions
 	\item Examples, picture of symm. object with two hands and hands are projected 
 		  into manifold.
-	\item The symmetric nature of the objects allows us to update our representation
-		  as the object rotated around the axis of symmetry.
+	\item 
 \end{enumerate}
-\item Advantages of approach?
-	\begin{enumerate}
-	\item We will show that this basic property leads to a significant reduction of 
-		  search complexity in grasp planning
-	\item \emph{Since the object is symmetric any stable grasp can be rotated around the axis
-		  yielding a family of feasible grasps}.
-	\item Specifically, this property allows us to generate multiple grasps around 
-		  the object which is useful for bimanual and cooperative robot hand over 
-		  tasks. In addition, it allows us to plan a single grasp for a sequence of tasks.
-	\item We use this approach to generate grasps for a set of scenarios involving
-		  sequential, bimanual and collaborative components. 
-	\end{enumerate}
-	
-\item Contributions?
-	\begin{enumerate}
-	\item new representation for efficient parameterization of stable grasps 	
-	\item discussion of properties of representation induced by symmetric objects
-	\item a grasp planning algorithms using representation to achieve sequential and 
-		  bimanual tasks  
-	\end{enumerate}
-	\end{enumerate}
-	
 \section{Related Work}
 
 \section{Manifold Representations for Rotationally Symmetric Objects}
@@ -143,7 +184,9 @@ in humanoid robots.
 		\item For each patch of the discretized manifold, using the center point 
 		as the reference for the wrist, we attempt to compute a collision-free 		inverse kinematics solution. Refer to picture again showing red/blue and which collisions were caused. 
 		
+		\item An interesting property of this representation is that the produced map can be efficiently updated when the object is rotated around its axis of symmetry. More specifically, a rotation around the z-axis corresponds to a shift along the $\theta$ dimension. 
 		
+		\item 
 	\end{enumerate}
 	
 	\item Low-dimensional manifold for grasps on symmetric objects	
@@ -160,22 +203,21 @@ in humanoid robots.
 %
 
 % symmetry and invariance
-% Pic0a: wiki cylinder parameterization
-% Pic0b: discretization and red/blue stuff
-% Pic1: example of cup rotating
-% Pic2: handprint picture (3 fingers)
-% Pic3: multiple hand rotations around object (wine bottle)
+% Pic1: wiki cylinder parameterization
+% Pic2: coke picture
+% Pic3: discretization and red/blue stuff with bottle
+% Pic4: multiple hand rotations around object (wine bottle)
+% Pic5: project robotiq hand onto coke
 
 \section{Task Planning with Grasp Manifolds}
-% Pic4: two tasks superimposed on top of each other (manifold pictures and simulation)
-% Pic5: pose of the second task changes (object rotation)
+% Pic5: two tasks superimposed on top of each other (manifold pictures and simulation) and one object rotating
+
  
 \subsection{Planning for Task Sequences}
-% Pic6: Rod through 3 tasks
-% Pic6.5: Sequence of 3 tasks in simulation
+% Pic6: Rod through 3 tasks (superimposed)
 
 \subsection{Planning for Bi-Manual and Cooperative Tasks}
-% Pic7: Hand prints of two robots
+% Pic7: Hand prints of two robots (two different robot hands, robotiq vs. tweezer)
 % Pic8: Picture of two robots in front of each other, hand over
 
 \section{Experiments}
@@ -188,7 +230,8 @@ in humanoid robots.
 \section{Discussion}
 % this representation introduces warping effects
 % talk about variable radius objects (picture)
-
+% hierarchical grid, importance, details lost
+% using profile instead of height
 \section{Conclusions}
 
 \end{document}
