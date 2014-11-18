@@ -47,35 +47,35 @@ in humanoid robots.
 \section{Introduction}
 
 Robots with advanced dexterous capabilities have the potential to revolutionize important
-application domains such as healthcare, security, or manufacturing. Whether it is in structured
+application domains such as healthcare, security, or manufacturing. Whether in structured
 environments such as factories, or unstructured environments such as homes, grasping is often the
 first step in the physical interaction between a robot and its surroundings. The generation of
-grasps on objects is therefore at the heart of planning physical tasks. However, to date, most grasp
-planning methods are mainly focused on generating physically stable grasps, without incorporating
+grasps on objects is therefore at the heart of plan generation for physical tasks. However, to date most grasp
+planning methods are mainly focused on generating physically stable grasps without incorporating
 immediate or future task constraints. 
 
-Many well established algorithms assume only a single action, and do not include foresight and
+Many well established algorithms assume only a single action and do not include foresight and
 reasoning about next actions. However, when picking up a mug, it is important to select a grasp that
-facilitates the next action to be performed. In case the next action is a pouring motion, the robot
+facilitates the next action to be performed. For example, in case the next action is a pouring motion, the robot
 needs avoid grasps that would cover the rim of the object. In contrast, if any of the next actions
 involves placing the mug on the table, the robot cannot choose any grasp in which fingers touch the
-mug's base. To date, many grasp representations are based on a floating hand representing only the
+mug's base. 
+
+Many grasp representations are based on a floating hand, thereby representing only the
 end-effector and ignoring the embodiment of the entire robot in environment. As a result, infeasible
-grasps are generated and have to be pruned out in a post-processing step. Yet, selecting grasps that
-facilitate task completion is particularly important for bi-manual, sequential, and co-worker
-scenarios. In these scenarios, grasps need to be carefully chosen, such that they do not violate
-constraints imposed by a second arm, a human interaction partner, or a future action. 
+grasps are generated and have to be pruned out in a post-processing step. This can be particularly
+limiting in bi-manual, sequential, and co-worker scenarios, in which the actions of one agent are likely to violate the constraints of another agent. In these scenarios, grasps need to be carefully chosen, such that they do not violate constraints imposed by a second arm, a human interaction partner, or a future action. 
 
 In this paper, we address the issue of manipulation planning with task constraints. We are
 particularly interested in tasks that involve several subtasks or several interacting agents.
-Planning grasps for such tasks can rapidly become computationally infeasible due to a large search
+Planning grasps for such tasks can rapidly become computationally infeasible due to the large search
 space. The key insight of this paper is that re-occurring patterns in the geometry of shapes can be
-exploited to drastically reduce the space of solutions. We will introduce an low-dimensional,
+exploited to drastically reduce the space of solutions. We will introduce a low-dimensional,
 object-centered representation for grasp planning which is based on rotational symmetries. The
-symmetric nature of the objects allows us to update our representation as the object rotated around
+symmetric nature of the objects allows us to update our representation as the object is rotated around
 the axis of symmetry. \emph{Since the object is symmetric any stable grasp can be rotated around the
 axis yielding a family of feasible grasps}. We will show that this basic property leads to a
-significant reduction of search complexity in grasp planning. Specifically, this property allows us
+significant reduction of the search complexity in grasp planning. Specifically, this property allows us
 to generate multiple grasps around the object which is useful for bi-manual tasks and cooperative
 robot hand over tasks. In addition, it allows us to identify a single grasp that is useful for a
 sequence of tasks.
@@ -143,33 +143,31 @@ sequence of tasks.
 \newpage
 \section{Related Work}
 Robot grasping is a heavily studied sub-field of robotics.
-Until recently, most approaches have focused on the task 
+Until recently, most approaches have focused on the problem 
 of generating stable grasps on objects. Given a model of an object, a hand shape is synthesized 
-that allows physically stable manipulation of the object~\cite{Klank2009, Kragic2001}.
+that allows the physically stable manipulation of the object~\cite{Klank2009, Kragic2001}.
 A prevalent approach is to modify the grasp parameters 
-until a grasp is found which is optimal w.r.t.~
-a given criterion, such as force closure \cite{nguyen} or the 
-object wrench space \cite{pollardphd}. For a recent survey 
-on grasp synthesis the reader is refered to \cite{bohg}.
+until a hand shape is found which is optimal w.r.t.~a given criterion, such as force closure \cite{nguyen}, or grasp wrench space \cite{Borst}. For recent surveys 
+of the grasp synthesis literature the reader is referred to \cite{Bohg2014} and \cite{Sahbani2012}.
 
 To efficiently synthesize a 
 variety of grasps, objects are often modelled
-using primitives, i.e. bounding boxes \cite{huebner2008selection}, a medial axis
-representation \cite{przybylski2010unions}, superquadrics \cite{goldfeder2007grasp}, 
-and simple geometrical shapes such as cylinders, boxes and spheres \cite{miller2003automatic}.
+using primitives, such as bounding boxes \cite{huebner2008selection}, medial axis
+representations \cite{przybylski2010unions}, superquadrics \cite{goldfeder2007grasp}, 
+or simple geometrical shapes including cylinders, boxes and spheres \cite{miller2003automatic}.
 Another way of increasing efficiency is by reducing the dimensionality of
-the space of possible hand configurations. In \cite{ciocarlie} and \cite{benamor}, 
+the space of possible hand configurations. In \cite{ciocarlie2009} and \cite{benamor}, 
 dimensionality reduction techniques are used to project the space of
 hand shapes onto a low-dimensional manifold of two to three dimensions.
 However, in the above approaches, reachability and possible collisions
-during motion execution are only analyzed in a postprocessing step after 
-grasps are generated~\cite{something}. Hence, possibly unreachable or unsafe grasp configurations 
-are produced. Recent approaches have tried to bridge the divide by grasp synthesis
-and motion planning~\cite{vahrenkamp}. Still, as noted in \cite{dang}, 
+during motion execution are only analyzed in a post-processing step after 
+grasps are generated. Hence, possibly unreachable or unsafe grasp configurations 
+are produced. Recent approaches have tried to bridge the divide through simultaneous 
+grasp synthesis and motion planning~\cite{Vahrenkamp12d}. Still, as noted in \cite{dang}, 
 looking solely at the stability of the grasp, or other
-immediate criterion ignores the task constraints which 
+immediate criteria ignores task constraints which 
 are induced by the subsequent manipulations of the object. 
-The grasp is, therefore, highly dependent on the task 
+A grasp is often highly dependent on the task 
 to be performed and should be chosen with next actions in mind.
 
 Dang et al. \cite{dang} incorporate task constraints by 
@@ -185,12 +183,15 @@ they can infer appropriate grasps for a given task.
 A machine learning approach with a similar goal
 was introduced by Song et al. \cite{song}. Their approach 
 uses a Bayesian Network to learn task constraints for 
-object manipulation. The need for sufficient \emph{foresight} 
-during action selection has recently been discussed in ~\cite{levihn}. Levihn and colleagues
-presented a hierarchical planner which looks ahead into future plans to 
+object manipulation. 
+
+The need for sufficient \emph{foresight} 
+during action selection has recently been discussed in the hierarchical
+planning literature~\cite{LevihnIROS13}. Levihn and colleagues
+argue that look-ahead into future plans is important to 
 avoid making short-sighted choices. While close in spirit to the 
 work presented in our paper, the work of Levihn and colleagues 
-concentrates on the task of moving among obstales and does not 
+concentrates on the task of moving among obstacles and does not 
 include grasp synthesis.
 
 In this paper, we show how inherent shape properties, specifically
@@ -198,7 +199,7 @@ rotational symmetries, can be used to efficiently generate
 task-constrained grasps. Object symmetries have long
 been studied in the computer vision literature~\cite{}.
 Recently, various studies have indicated that symmetries 
-can be exploited for grasping~\cite{kroemer, bohg}. However, 
+can be exploited for grasping~\cite{kroemerHumanoids2012, bohg2011mind}. However, 
 these studies have mostly focused on how to generate complete 
 meshes from partial point clouds.
 
@@ -207,38 +208,37 @@ meshes from partial point clouds.
 \section{Manifold Representations for \\Rotationally Symmetric Objects}
 
 Projecting manipulation constraints such as collisions with the environment and robot
-manipulator limitations such as reachability onto object surfaces can facilitate the search
-for contact points for feasible grasps. In this work, we demonstrate that particularly for rotationally
-symmetric objects, which do not have any surface protrusions or cavities, a number of grasping subproblems
+manipulator limitations (e.g. reachability) onto object surfaces can facilitate the search
+for feasible grasps. In this work, we demonstrate that particularly for rotationally
+symmetric objects, which do not have any surface protrusions or cavities, a number of grasping sub-problems
 such as finger placements, wrist pose, and collision-free inverse kinematics are simplified. 
 Inspired by the texture mapping literature in computer graphics, we begin with the two-dimensional manifold
 representation of rotationally symmetric objects whose surfaces can be unwrapped
 into simple planes. The goal is to use this low-dimensional representation to accumulate
-multiple task constraints on the same local object space and then, efficiently identify 
+multiple task constraints in the same local object space and then, efficiently identify 
 grasps that satisfy all the future actions. 
 
 %==================================================================================================
 \subsection{Cylindrical Surface Parametrization}
 
-Coordinate spaces characterized by rotations around an axis can be parameterized by cylindrical
+Coordinate spaces characterized by rotations around an axis can be parametrized by cylindrical
 parameters where a vector $\vech{z}$ represents the principal orientation and the polar axis
 $\vech{a}$ captures the secondary direction in the reference plane perpendicular to $\vech{z}$. 
-Using their intersection $o$ as the origin, any point in the Euclidean coordinate system can
+Using their intersection $\vech{o}$ as the origin, any point in the Euclidean coordinate system can
 be represented in this coordinate system by computing the projection of the point onto the
 $\vech{z}$ axis, its distance to the axis, and the angle between the polar axis $\vech{a}$ and its
 projection onto the reference plane. 
 
 Figure \ref{fig:representation} demonstrates the representation
-of a contact point on a rotationally symmetric object in terms of the parameters $[h, r, \theta]^T$
+of a point on a rotationally symmetric object in terms of the parameters $[h, r, \theta]^T$
 that correspond to the height along $\vech{z}$, the radius $r$ of the circle parallel to the
 reference plane that includes the point, and the angle $\theta$ between $\vech{a}$ and the point
 projection onto the reference plan. Note that the reference plane is arbitrarily placed 
-on the bottom surface of the object and the polar axis points in a random
-direction. 
+on the bottom surface of the object and the polar axis can be freely chosen within this plane. 
 
-\begin{figure}[ht!]
+\begin{figure}[t]
   \begin{center}
-    \includegraphics[width=0.75\linewidth]{./images/representation.png} \quad 
+    \includegraphics[width=0.5\linewidth]{./images/representation.png} \quad 
   \end{center}
   \caption{Cylindrical coordinate system to parameterize points on a rotationally symmetric object}
 %   \caption{A of a
@@ -251,11 +251,11 @@ direction.
 \newpage
 
 A significant observation about the representation of rotationally symmetric objects in cylindrical
-coordinates is the dependency of the radius $r$ and the height $h$ parameters. For a given shape $S$,
+coordinates is the dependency between the radius $r$ and the height $h$ parameters. For a given shape $S$,
 all the points on $S$, at some height $h$ along the principal axis $\vech{z}$, have the same distance
-$r$ to the axis: $\forall p \in S$ s.t. $p \cdot \vech{z} = h$, $dist(p, \vech{z}) = r_S(h)$. The
+$r$ to the axis: $\forall \vech{p} \in S$ s.t. $\vech{p} \cdot \vech{z} = h$, $dist(\vech{p}, \vech{z}) = r_S(h)$. The
 function $r_S(h)$ represents the inherent curvature of the shape - for instance, for a cylinder, $r
-= c$ for some constant $c$. Based on this observation, we can conclude that any contact point $p$ on
+= c$ for some constant $c$. Based on this observation, we can conclude that any contact point $\vech{p}$ on
 an object shape $S$ can in fact be parameterized minimally by two variables, $h$ and $\theta$.
 In this work, we show that analyzing the task constraints, robot limitations and contact models 
 in this low-dimensional subspace leads to significant efficiency gains in grasp planning.
@@ -335,6 +335,22 @@ of freedom but the rotation around axis of symmetry since the rotation does not 
 properties. The goal is to autonomously exploit the under-constrained task specifications by
 planning for object rotations and grasp positions. 
 
+\begin{figure}[t]
+  \begin{center}
+    \includegraphics[width=0.45\textwidth]{./images/bottlemapping.png} \quad
+  \end{center}
+  \caption{The points on the 3D surface (left) are projected onto a 2D cylindrical manifold.}
+  \label{fig:unfolding} 
+\end{figure}
+
+\begin{figure*}[ht]
+  \begin{center}
+    \includegraphics[width=0.75\linewidth]{./images/rotatingWine.png} \quad
+  \end{center}
+%   \caption{The points on the 3D surface (left) are projected onto a 2D cylindrical manifold.}
+  \label{fig:unfolding} 
+\end{figure*}
+
 By only modeling grasps that are perpendicular to the axis of symmetry, e.g. grasp
 rotates around object, we induce a coupling between gripper and object poses. Now, \textit{given a
 single pair of gripper and object poses that is known to satisfy task constraints, an infinite
@@ -353,29 +369,14 @@ discretized manifold, using the center point  as the reference for the wrist, we
 a collision-free inverse kinematics solution. Refer to picture again showing red/blue and which
 collisions were caused. 
 
-\begin{figure}[ht!]
-  \begin{center}
-    \includegraphics[width=0.45\textwidth]{./images/bottlemapping.png} \quad
-  \end{center}
-  \caption{The points on the 3D surface (left) are projected onto a 2D cylindrical manifold.}
-  \label{fig:unfolding} 
-\end{figure}
 
 
 A crucial property of this representation is that the produced map can
 be efficiently updated when the object is rotated around its axis of symmetry. More specifically, a
 rotation around the z-axis corresponds to a shift along the $\theta$ dimension. 
 
-\begin{figure*}[t]
-  \begin{center}
-    \includegraphics[width=0.75\linewidth]{./images/rotatingWine.png} \quad
-  \end{center}
-%   \caption{The points on the 3D surface (left) are projected onto a 2D cylindrical manifold.}
-  \label{fig:unfolding} 
-\end{figure*}
-
 %==================================================================================================
-\newpage
+%\newpage
 \subsubsection{Extrapolating task constraints to different \\object rotations}
 
 The analysis of grasp feasibility for a given object pose and task description can be utilized to reason
@@ -624,26 +625,33 @@ mapping can be reduced from the inverse kinematics formulation.
       $i \leftarrow i + 1$;\\ 
     }
     \BlankLine
+    \tcp{\small Minimize collisions by moving random grasp\normal}
     \For{$iters \leftarrow 0$ \KwTo MAX\_ITERS} {  
       
+      \tcp{\small Stop if all the grasps are collision free\normal}
       \lIf{$W.collisionFree()$} \textbf{return } $\{h_i, \theta_i\}$;\\ 
       \BlankLine
-      $R \leftarrow \mathbb{R}[random()]$;  \\
+      
+      $R \leftarrow \mathbb{R}[random()]$;  \tcp*{\small Choose random robot\normal}\\
       $dirs \leftarrow [\{\delta h,0\}, \{0, \delta \theta\}, \{-\delta h, 0\}, \{0, -\delta \theta\}]$; \\
       
-      $minError \leftarrow \infty, ~ bestDir \leftarrow \emptyset; $ \\
+      $minNumColls \leftarrow \infty, ~ bestDir \leftarrow \emptyset; $ \\
       \For{$dir \in dirs$} {
 	  
 	$h^* \leftarrow h_R + dir[0], ~\theta^* \leftarrow \theta_R + dir[1];$ \\
 	\lIf{$M[(h^*-\hat{h})/\delta h][(\theta^*-\hat{\theta})/\delta \theta] = 0;$}
 	  \textbf{continue;} 
 	
-	$error \leftarrow $computeError($W$); \\
-	\If{$error < minError$} {
-	  $minError \leftarrow error;$ \\
+	$numColls \leftarrow $countCollisions($W$); \\
+	\If{$numColls < minNumColls$} {
+	  $minNumColls \leftarrow numColls;$ \\
 	  $bestDir \leftarrow dir;$
 	}
       }
+      
+      \tcp{\small Update grasp with minimum collision direction\normal}
+      $h^* \leftarrow h_R + dir[0], ~\theta^* \leftarrow \theta_R + dir[1];$ \\
+      $h_r \leftarrow h^*, \theta_r \leftarrow \theta^*$;
       
     }
   }
@@ -698,4 +706,6 @@ mapping can be reduced from the inverse kinematics formulation.
 \newpage
 \section{Conclusions}
 
+\bibliographystyle{plain}
+\bibliography{aamas2015}
 \end{document}

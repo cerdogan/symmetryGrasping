@@ -625,26 +625,33 @@ mapping can be reduced from the inverse kinematics formulation.
       $i \leftarrow i + 1$;\\ 
     }
     \BlankLine
+    \tcp{\small Minimize collisions by moving random grasp\normal}
     \For{$iters \leftarrow 0$ \KwTo MAX\_ITERS} {  
       
+      \tcp{\small Stop if all the grasps are collision free\normal}
       \lIf{$W.collisionFree()$} \textbf{return } $\{h_i, \theta_i\}$;\\ 
       \BlankLine
-      $R \leftarrow \mathbb{R}[random()]$;  \\
+      
+      $R \leftarrow \mathbb{R}[random()]$;  \tcp*[f]{\small Choose random robot\normal}\\
       $dirs \leftarrow [\{\delta h,0\}, \{0, \delta \theta\}, \{-\delta h, 0\}, \{0, -\delta \theta\}]$; \\
       
-      $minError \leftarrow \infty, ~ bestDir \leftarrow \emptyset; $ \\
+      $minNumColls \leftarrow \infty, ~ bestDir \leftarrow \emptyset; $ \\
       \For{$dir \in dirs$} {
 	  
 	$h^* \leftarrow h_R + dir[0], ~\theta^* \leftarrow \theta_R + dir[1];$ \\
 	\lIf{$M[(h^*-\hat{h})/\delta h][(\theta^*-\hat{\theta})/\delta \theta] = 0;$}
 	  \textbf{continue;} 
 	
-	$error \leftarrow $computeError($W$); \\
-	\If{$error < minError$} {
-	  $minError \leftarrow error;$ \\
+	$numColls \leftarrow $countCollisions($W$); \\
+	\If{$numColls < minNumColls$} {
+	  $minNumColls \leftarrow numColls;$ \\
 	  $bestDir \leftarrow dir;$
 	}
       }
+      
+      \tcp{\small Update grasp with minimum collision direction\normal}
+      $h^* \leftarrow h_R + dir[0], ~\theta^* \leftarrow \theta_R + dir[1];$ \\
+      $h_r \leftarrow h^*, \theta_r \leftarrow \theta^*$;
       
     }
   }
