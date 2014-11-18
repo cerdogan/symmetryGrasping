@@ -135,6 +135,65 @@ sequence of tasks.
 %==================================================================================================
 \newpage
 \section{Related Work}
+Robot grasping is a heavily studied sub-field of robotics.
+Until recently, most approaches have focused on the task 
+of generating stable grasps on objects. Given a model of an object, a hand shape is synthesized 
+that allows physically stable manipulation of the object~\cite{Klank2009, Kragic2001}.
+A prevalent approach is to modify the grasp parameters 
+until a grasp is found which is optimal w.r.t.~
+a given criterion, such as force closure \cite{nguyen} or the 
+object wrench space \cite{pollardphd}. For a recent survey 
+on grasp synthesis the reader is refered to \cite{bohg}.
+
+To efficiently synthesize a 
+variety of grasps, objects are often modelled
+using primitives, i.e. bounding boxes \cite{huebner2008selection}, a medial axis
+representation \cite{przybylski2010unions}, superquadrics \cite{goldfeder2007grasp}, 
+and simple geometrical shapes such as cylinders, boxes and spheres \cite{miller2003automatic}.
+Another way of increasing efficiency is by reducing the dimensionality of
+the space of possible hand configurations. In \cite{ciocarlie} and \cite{benamor}, 
+dimensionality reduction techniques are used to project the space of
+hand shapes onto a low-dimensional manifold of two to three dimensions.
+However, in the above approaches, reachability and possible collisions
+during motion execution are only analyzed in a postprocessing step after 
+grasps are generated~\cite{something}. Hence, possibly unreachable or unsafe grasp configurations 
+are produced. Recent approaches have tried to bridge the divide by grasp synthesis
+and motion planning~\cite{vahrenkamp}. Still, as noted in \cite{dang}, 
+looking solely at the stability of the grasp, or other
+immediate criterion ignores the task constraints which 
+are induced by the subsequent manipulations of the object. 
+The grasp is, therefore, highly dependent on the task 
+to be performed and should be chosen with next actions in mind.
+
+Dang et al. \cite{dang} incorporate task constraints by 
+semantically annotating grasps from a database. These grasps
+are then mapped onto a new object using local optimization.
+While this approach is a substantial step towards task-based
+grasp synthesis, it still requires prior human annotations of 
+a grasp dataset. In a similar vein, Antanas et al. \cite{antanas} 
+use a probabilistic logic module to semantically reason
+about pre-grasp configurations with respect to the intended tasks.
+By exploiting symbolic world knowledge stored in object/task ontologies,
+they can infer appropriate grasps for a given task. 
+A machine learning approach with a similar goal
+was introduced by Song et al. \cite{song}. Their approach 
+uses a Bayesian Network to learn task constraints for 
+object manipulation. The need for sufficient \emph{foresight} 
+during action selection has recently been discussed in ~\cite{levihn}. Levihn and colleagues
+presented a hierarchical planner which looks ahead into future plans to 
+avoid making short-sighted choices. While close in spirit to the 
+work presented in our paper, the work of Levihn and colleagues 
+concentrates on the task of moving among obstales and does not 
+include grasp synthesis.
+
+In this paper, we show how inherent shape properties, specifically
+rotational symmetries, can be used to efficiently generate 
+task-constrained grasps. Object symmetries have long
+been studied in the computer vision literature~\cite{}.
+Recently, various studies have indicated that symmetries 
+can be exploited for grasping~\cite{kroemer, bohg}. However, 
+these studies have mostly focused on how to generate complete 
+meshes from partial point clouds.
 
 %==================================================================================================
 \newpage
