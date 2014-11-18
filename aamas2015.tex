@@ -154,19 +154,52 @@ grasps that satisfy all the future actions.
 %==================================================================================================
 \subsection{Cylindrical Surface Parametrization}
 
+Coordinate spaces characterized by rotations around an axis can be parameterized by cylindrical
+parameters where a vector $\vech{z}$ represents the principal orientation and the polar axis
+$\vech{a}$ captures the secondary direction in the reference plane perpendicular to $\vech{z}$. 
+Using their intersection $o$ as the origin, any point in the Euclidean coordinate system can
+be represented in this coordinate system by computing the projection of the point onto the
+$\vech{z}$ axis, its distance to the origin, and the angle between the $\vech{a}$ axes and its
+projection onto the reference plane. 
 
-The manifold representation which will be discussed in the remainder of the paper is based on a
-cylindrical coordinate system. We will therefore start by introducing cylindrical coordinates. 
+Figure \ref{fig:representation} demonstrates the representation
+of a contact point on a rotationally symmetric object in terms of the parameters $[h, r, \theta]^T$
+that correspond to the height along $\vech{z}$, the radius $r$ of the circle parallel to the
+reference plane that includes the point, and the angle $\theta$ between $\vech{a}$ and the point
+projection onto the reference plan. Note that the reference plane is arbitrarily placed 
+on the bottom surface of the object and the polar axis points in a random
+direction. 
 
 \begin{figure}[ht!]
   \begin{center}
     \includegraphics[width=0.8\linewidth]{./images/representation.png} \quad 
   \end{center}
-  \caption{A cylindrical coordinate system used to parameterize points on the surface of a
-  rotationally symmetric object. The axis $\vech{a}$ corresponds to the polar axis, while $\vech{h}$
-  is the axis of symmetry. Any point on the surface can be represented using height $h$, radius $r$,
-  and angle $\theta$. \label{fig:cylindricalcs}}
+%   \caption{A cylindrical coordinate system used to parameterize points on the surface of a
+%   rotationally symmetric object. The axis $\vech{a}$ corresponds to the polar axis, while $\vech{h}$
+%   is the axis of symmetry. Any point on the surface can be represented using height $h$, radius $r$,
+%   and angle $\theta$. }
+  \label{fig:representation}
 \end{figure}
+
+\newpage
+
+A significant observation about the representation of rotationally symmetric objects in cylindrical
+coordinates is the dependency of the radius $r$ and the height $h$ parameters. For a given shape $S$,
+the distance of any point $p$ from the origin, $r$, is a function of the height of the point, $h$, 
+along the princial axis $\vech{z}$: $r = r_S(h)$. This function represents the inherent curvature of
+the shape - for instance, for a cylinder, $r = c$ for some constant $c$. Based on this observation,
+we can conclude that any contact point $p$ on an object shape $S$ can in fact be parameterized
+minimally by two variables, $h$ and $\theta$...
+
+Using the principal axis $\vech{z}$, the polar axis $\vech{a}$, and their cross-product, we can define
+the local object frame $L$ in the Euclidean coordinate frame. Transforming the coordinates of
+a point in the Euclidean world frame $p^w$ to the local object frame $p^l$, and then finally utilizing
+the cylindrical 
+
+
+The manifold representation which will be discussed in the remainder of the paper is based on a
+cylindrical coordinate system. We will therefore start by introducing cylindrical coordinates. 
+
  
 Let $\vech{z}$ be the axis of symmetry, $\vech{o}$ be the origin, and $\vech{a}$ be the polar axis
 of the object. The polar axis lies in the reference plane of the object and is perpendicular to

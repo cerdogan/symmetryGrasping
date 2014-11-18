@@ -141,24 +141,30 @@ sequence of tasks.
 \section{Manifold Representations for \\Rotationally Symmetric Objects}
 
 Projecting manipulation constraints such as collisions with the environment and robot
-manipulator limitations such as reachability 
-Rotationally symmetric objects
-
-In this section, we introduce a low-dimensional representation for grasp planning with
-rotationally symmetric objects. The main idea is to project the surface of the object onto a
-two-dimensional manifold, where each point on the manifold corresponds to a possible grasp of the
-robot. Planning can then be performed by identifying a point on this manifold which fulfills all
-task constraints.
+manipulator limitations such as reachability onto object surfaces can facilitate the search
+for contact points for feasible grasps. In this work, we demonstrate that particularly for rotationally
+symmetric objects, which do not have any surface protrusions or cavities, a number of grasping subproblems
+such as finger placements, wrist pose, and collision-free inverse kinematics are simplified. 
+Inspired by the texture mapping literature in computer graphics, we begin with the two-dimensional manifold
+representation of rotationally symmetric objects whose surfaces can be unwrapped
+into simple planes. The goal is to use this low-dimensional representation to accumulate
+multiple task constraints on the same local object space and then, efficiently identify 
+grasps that satisfy all the future actions. 
 
 %==================================================================================================
-\subsection{Cylindrical Parametrization of \\Surface Points}
+\subsection{Cylindrical Surface Parametrization}
+
+Coordinate spaces characterized by rotations around an axis can be parameterized by cylindrical
+parameters where a vector $\vech{z}$ represents the principal orientation and an incident $\vech{a}$
+
+
 
 The manifold representation which will be discussed in the remainder of the paper is based on a
 cylindrical coordinate system. We will therefore start by introducing cylindrical coordinates. 
 
 \begin{figure}[ht!]
   \begin{center}
-    \includegraphics[width=0.4\textwidth]{./images/cylindricalCS.pdf} \quad 
+    \includegraphics[width=0.8\linewidth]{./images/representation.png} \quad 
   \end{center}
   \caption{A cylindrical coordinate system used to parameterize points on the surface of a
   rotationally symmetric object. The axis $\vech{a}$ corresponds to the polar axis, while $\vech{h}$
