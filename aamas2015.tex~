@@ -324,8 +324,8 @@ Let the function $m: \mathbb{S}, SE(3) \rightarrow \{0,1\}$ represent a mapping 
 pose $T^w \in SE(3)$ and a contact pose on the object surface, $\vech{x} = [h, \theta]^T \in \mathbb{S}$,
 to a binary evaluation of whether a grasp is feasible. The feasibility of a grasp may depend on a variety
 of criteria such as inverse kinematics, collisions, torque limits, manipulability and etc. In this work,
-we focus on collision-free inverse kinematics and define the operator $ik: SE(3) \rightarrow \{0,1\}$
-that evaluates whether an arm configuration exists that can achieve the end-effector pose $T^w_e \in SE(3)$. 
+we focus on collision-free inverse kinematics and define the operator $ik: SO(3), \mathbb{R}^3 \rightarrow \{0,1\}$
+that evaluates whether an arm configuration exists that can achieve the end-effector rotation $R^w_e \in SO(3)$ and location $t^w_e \in \mathbb{R}^3$. 
 
 We claim that given the mapping of feasibility grasps for an initial object pose $T^w_o$, the feasibility of any 
 grasp $x \in \mathbb{S}$, for a new pose $T^w_{o_2}$, can be deduced by using the previous mapping:
@@ -334,7 +334,21 @@ grasp $x \in \mathbb{S}$, for a new pose $T^w_{o_2}$, can be deduced by using th
   m([h,\theta],T^w_{o_2}) = m([h,\theta+\delta], T^w_o)
 \end{equation}
 
+\noindent where $T^w_{o_2} = T^w_o R^z(\delta)$ where $R^z(\delta)$ is a rotation matrix around the
+local $z-axis$ by angle $\delta$ (the notation $T^z(\delta)$ also represents a
+transformation matrix with the rotation $R^z(\delta)$ but no translation). This claim can be proven
+by showing that the rotations of the gripper and the object counteract each other:
 
+\begin{alignat}{2}
+  m(&[h,\theta]^T,T^w_{o_2}) 	=	\\
+				&= ik(R^w_{o_2} R^z(\theta), 			&&T^w_{o_2} f^{-1}([h,\theta]^T)) \\
+				&= ik(R^w_o R^z(\delta) R^z(\theta), 		&&T^w_{o_2} T^z(-\delta) f^{-1}([h,\theta+\delta]^T)) \\
+				&= ik(R^w_o R^z(\theta) R^z(\delta), 		&&T^w_o f^{-1}([h,\theta+\delta]^T)) \\
+				&= ik(R^w_o R^z(\theta+\delta), 		&&T^w_o f^{-1}([h,\theta+\delta]^T)) \\
+				&= m([h,\theta+\delta]^T, T^w_o) 				
+\end{alignat}
+
+    
 
 
 
