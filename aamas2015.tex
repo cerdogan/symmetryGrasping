@@ -1,5 +1,12 @@
 \documentclass{aamas2015}
 \usepackage{amsmath}
+\makeatletter
+\newif\if@restonecol
+\makeatother
+\let\algorithm\relax
+\let\endalgorithm\relax
+\usepackage[algoruled, vlined,linesnumbered]{algorithm2e}
+
 
 \pdfpagewidth=8.5truein
 \pdfpageheight=11truein
@@ -514,7 +521,101 @@ mapping can be reduced from the inverse kinematics formulation.
 % Pic5: project robotiq hand onto coke
 
 \newpage
+-
+\newpage
+-
+\newpage
+% =================================================================================================
 \section{Task Planning with Grasp Manifolds}
+
+\begin{algorithm}[ht!]
+  \SetCommentSty{emph}
+  \KwIn{$\{\hat{h}, \check{h}, \hat{\theta}, \check{\theta}\}$: min/max height and angle limits, 
+  $\{\delta h, \delta \theta\}$: increments, $R$: robot, $W$: world}
+  \KwResult{$M$: Binary 2D array with feasibility indicators}
+  \For{$h \leftarrow \hat{h}$ \KwTo $\check{h}$} {
+    \For{$\theta \leftarrow \hat{\theta}$ \KwTo $\check{\theta}$} {
+      $p^l \leftarrow [r cos(\theta), r sin(\theta), h]^T;$ \tcp*[f]{\small Inverse mapping\normal}\\
+      $p^w \leftarrow W.objectPose() * p^l$; \tcp*[f]{\small Goal wrist pose \normal} \\
+      \For(\tcp*[f]{\small Sample redundancy \normal}){$\phi \leftarrow 0$ \KwTo $2 \pi$} {
+	$q \leftarrow R.analyticalIK(W.objectPose(), p^w, \phi);$ \\
+	\If{W.collisionFree(q)} {
+	  $M[(h-\hat{h})/\delta h][(\theta-\hat{\theta})/\delta \theta] \leftarrow 1;$ \\
+	  \textbf{jump to line 2};
+	}
+      }
+      $\theta \leftarrow \theta + \delta \theta;$
+    }
+    $h \leftarrow h + \delta h;$
+  }
+  \Return{$M$}; 
+  \caption{CreateMap(): Generates feasibility maps}
+\end{algorithm}
+
+
+
+\begin{algorithm}[ht!]
+  \SetCommentSty{emph}
+  \KwIn{$\{\hat{h}, \check{h}, \hat{\theta}, \check{\theta}\}$: min/max height and angle limits, 
+  $\{\delta h, \delta \theta\}$: increments, $R$: robot, $W$: world,
+  \\ \hspace{3.5em}$\mathbb{T}$: object poses for tasks}
+  \KwResult{$\{h,\theta\}$: grasp pose, $\delta_i$: task rotations }
+  \For(\tcp*[f]{\small Generate maps for each task \normal}){$T \in \mathbb{T}$, $i \leftarrow 0$} {
+    $W.setObjectPose(T)$; \\
+    $M[i] = $CreateMap$(\hat{h}, \check{h}, \hat{\theta}, \check{\theta}, R, W);$\\
+    $i \leftarrow i + 1$; 
+  }
+  
+  \For(\tcp*[f]{\small Iterate through object height\normal}){$h \leftarrow \hat{h}$ \KwTo $\check{h}$} {
+    $\theta^* \leftarrow -1$; \\
+    \For(\tcp*[f]{\small Find grasp pose on 1st object\normal}){$\theta \leftarrow \hat{\theta}$ \KwTo $\check{\theta}$} {
+      \If{$M[(h-\hat{h})/\delta h][(\theta-\hat{\theta})/\delta \theta] = 1$} {
+	$\theta^* \leftarrow \theta;$ \\ 
+	\textbf{break;} \\
+      }
+    }
+    \lIf{$\theta^* = -1$}
+      \textbf{continue;} \\
+      \BlankLine
+      \BlankLine
+    $foundAll \leftarrow true;$ \\
+    \For(\tcp*[f]{\small Find grasps for each task\normal}){$T \in \mathbb{T}$, $i \leftarrow 0$} {
+      \For{$\theta \leftarrow \hat{\theta}$ \KwTo $\check{\theta}$} {
+	\If{$M[(h-\hat{h})/\delta h][(\theta-\hat{\theta})/\delta \theta] = 1$} {
+	$\mathbb{\delta}_i \leftarrow \theta - \theta^*;$ \\ 
+	\textbf{break;} \\
+      }
+    }
+    \If{$\mathbb{\delta}_i = \emptyset$} {
+	  $foundAll \leftarrow false;$ \\	
+	  \textbf{break;}\\
+	}
+    }
+    \lIf{$foundAll$} \textbf{return} $\{h,\theta^*,\delta_i ~ \forall i\};$
+  }
+   
+  \Return{$\emptyset$}; 
+  \caption{SingleGrasp(): Grasp for sequential tasks}
+\end{algorithm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 % Pic5: two tasks superimposed on top of each other (manifold pictures and simulation) and one object rotating
 
 \newpage 

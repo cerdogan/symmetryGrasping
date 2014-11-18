@@ -1,5 +1,12 @@
 \documentclass{aamas2015}
 \usepackage{amsmath}
+\makeatletter
+\newif\if@restonecol
+\makeatother
+\let\algorithm\relax
+\let\endalgorithm\relax
+\usepackage[algoruled, vlined,linesnumbered]{algorithm2e}
+
 
 \pdfpagewidth=8.5truein
 \pdfpageheight=11truein
@@ -411,8 +418,9 @@ in the world coordinate frame by composing the second object rotation $R^w_{o_2}
 the end-effector position is computed by composing the second object transform $T^w_{o_2}$ with the contact position
 in the local coordinates obtained with inverse cylindrical mapping $T^{o_2} = f^{-1}([h,\theta]^T)$. The key
 insight takes place in Equation \ref{eq:proof_key} where the cylindrical object representation is rotated by $\delta$
-degrees all the while the pose of the object is rotated in the opposite direction by composing with $T^z(-\delta)$. 
-
+degrees all the while the pose of the object is rotated in the opposite direction by composing with
+$T^z(-\delta)$. Equations 6 and 7 simply reorganize the terms to show that the initial feasibility
+mapping can be reduced from the inverse kinematics formulation.
 
 
 
@@ -513,7 +521,99 @@ degrees all the while the pose of the object is rotated in the opposite directio
 % Pic5: project robotiq hand onto coke
 
 \newpage
+-
+\newpage
+-
+\newpage
+% =================================================================================================
 \section{Task Planning with Grasp Manifolds}
+
+\begin{algorithm}[ht!]
+  \SetCommentSty{emph}
+  \KwIn{$\{\hat{h}, \check{h}, \hat{\theta}, \check{\theta}\}$: min/max height and angle limits, 
+  $\{\delta h, \delta \theta\}$: increments, $R$: robot, $W$: world}
+  \KwResult{$M$: Binary 2D array with feasibility indicators}
+  \For{$h \leftarrow \hat{h}$ \KwTo $\check{h}$} {
+    \For{$\theta \leftarrow \hat{\theta}$ \KwTo $\check{\theta}$} {
+      $p^l \leftarrow [r cos(\theta), r sin(\theta), h]^T;$ \tcp*[f]{\small Inverse mapping\normal}\\
+      $p^w \leftarrow W.objectPose() * p^l$; \tcp*[f]{\small Goal wrist pose \normal} \\
+      \For(\tcp*[f]{\small Sample redundancy \normal}){$\phi \leftarrow 0$ \KwTo $2 \pi$} {
+	$q \leftarrow R.analyticalIK(W.objectPose(), p^w, \phi);$ \\
+	\If{W.collisionFree(q)} {
+	  $M[(h-\hat{h})/\delta h][(\theta-\hat{\theta})/\delta \theta] \leftarrow 1;$ \\
+	  \textbf{jump to line 2};
+	}
+      }
+      $\theta \leftarrow \theta + \delta \theta;$
+    }
+    $h \leftarrow h + \delta h;$
+  }
+  \Return{$M$}; 
+  \caption{CreateMap(): Generates feasibility maps}
+\end{algorithm}
+
+
+
+\begin{algorithm}[ht!]
+  \SetCommentSty{emph}
+  \KwIn{$\{\hat{h}, \check{h}, \hat{\theta}, \check{\theta}\}$: min/max height and angle limits, 
+  $\{\delta h, \delta \theta\}$: increments, $R$: robot, $W$: world,
+  \\ \hspace{3.5em}$\mathbb{T}$: object poses for tasks}
+  \KwResult{$\{h,\theta\}$: grasp pose, $\delta_i$: task rotations }
+  \For(\tcp*[f]{\small Generate maps for each task \normal}){$T \in \mathbb{T}$, $i \leftarrow 0$} {
+    $W.setObjectPose(T)$; \\
+    $M[i] = $CreateMap$(\hat{h}, \check{h}, \hat{\theta}, \check{\theta}, R, W);$\\
+    $i \leftarrow i + 1$; 
+  }
+  
+  \For{$h \leftarrow \hat{h}$ \KwTo $\check{h}$} {
+    $\theta^* \leftarrow -1$; \\
+    \For{$\theta \leftarrow \hat{\theta}$ \KwTo $\check{\theta}$} {
+      \If{$M[(h-\hat{h})/\delta h][(\theta-\hat{\theta})/\delta \theta] = 1$} {
+	$\theta^* \leftarrow \theta;$ \\ 
+	\textbf{break;} \\
+      }
+    }
+    \lIf{$\theta^* = -1$}
+      \textbf{continue;} \\
+    $foundAll \leftarrow true;$ \\
+    \For(\tcp*[f]{\small Find grasps for each task\normal}){$T \in \mathbb{T}$, $i \leftarrow 0$} {
+      \For{$\theta \leftarrow \hat{\theta}$ \KwTo $\check{\theta}$} {
+	\If{$M[(h-\hat{h})/\delta h][(\theta-\hat{\theta})/\delta \theta] = 1$} {
+	$\mathbb{\delta}_i \leftarrow \theta - \theta^*;$ \\ 
+	\textbf{break;} \\
+      }
+    }
+    \If{$\mathbb{\delta}_i = \emptyset$} {
+	  $foundAll \leftarrow false;$ \\	
+	  \textbf{break;}\\
+	}
+    }
+    \lIf{$foundAll$} \textbf{return} $\mathbb{C}$;
+  }
+   
+  \Return{$M$}; 
+  \caption{SingleGrasp(): Grasp for sequential tasks}
+\end{algorithm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 % Pic5: two tasks superimposed on top of each other (manifold pictures and simulation) and one object rotating
 
 \newpage 

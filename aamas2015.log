@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.2.27)  18 NOV 2014 03:01
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.2.27)  18 NOV 2014 04:25
 entering extended mode
  %&-line parsing enabled.
 **aamas2015.tex
@@ -180,7 +180,44 @@ LaTeX Font Info:    Try loading font information for T1+aer on input line 100.
 
 (/usr/share/texmf-texlive/tex/latex/ae/t1aer.fd
 File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
-))) (./aamas2015.aux
+)))
+(/usr/share/texmf-texlive/tex/latex/algorithm2e/algorithm2e.sty
+Package: algorithm2e 2005/10/04 v3.9 algorithms environments
+\c@AlgoLine=\count109
+
+(/usr/share/texmf-texlive/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texmf-texlive/tex/latex/tools/xspace.sty
+Package: xspace 2006/05/08 v1.12 Space after command names (DPC,MH)
+)
+********************************************************
+Package `algorithm2e' Release 3.9 -- october 04 2005 --
+- algorithm2e-announce@lirmm.fr mailing list for announcement about releases
+- algorithm2e-discussion@lirmm.fr mailing list for discussion about package
+subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
+- Author: Christophe Fiorio (fiorio@lirmm.fr)
+********************************************************
+\skiptotal=\skip44
+\skiprule=\skip45
+\skiphlne=\skip46
+\skiptext=\skip47
+\skiplength=\skip48
+\algomargin=\skip49
+\skipalgocfslide=\skip50
+\algowidth=\dimen123
+\inoutsize=\dimen124
+\inoutline=\dimen125
+\algocf@inoutbox=\box30
+\algocf@inputbox=\box31
+\AlCapSkip=\skip51
+\AlCapHSkip=\skip52
+\algocf@capbox=\box32
+\c@algocfline=\count110
+\c@algocf=\count111
+\algocf@algoframe=\box33
+\algocf@algobox=\box34
+) (./aamas2015.aux
 
 LaTeX Warning: Label `fig:unfolding' multiply defined.
 
@@ -190,133 +227,133 @@ LaTeX Warning: Label `fig:unfolding' multiply defined.
 )
 \openout1 = `aamas2015.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
  (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count109
-\scratchdimen=\dimen123
-\scratchbox=\box30
-\nofMPsegments=\count110
-\nofMParguments=\count111
+\scratchcounter=\count112
+\scratchdimen=\dimen126
+\scratchbox=\box35
+\nofMPsegments=\count113
+\nofMParguments=\count114
 \everyMPshowfont=\toks39
-\MPscratchCnt=\count112
-\MPscratchDim=\dimen124
-\MPnumerator=\count113
+\MPscratchCnt=\count115
+\MPscratchDim=\dimen127
+\MPnumerator=\count116
 \everyMPtoPDFconversion=\toks40
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 20.
+LaTeX Font Info:    Try loading font information for U+msa on input line 27.
  (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 20.
+LaTeX Font Info:    Try loading font information for U+msb on input line 27.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 20.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 27.
 
 (/usr/share/texmf-texlive/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Try loading font information for OMS+aer on input line 20.
+LaTeX Font Info:    Try loading font information for OMS+aer on input line 27.
 
 (/usr/share/texmf-texlive/tex/latex/ae/omsaer.fd
 File: omsaer.fd 1999/12/27
 )
 LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 20.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 27.
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
 
 LaTeX Warning: Citation `Klank2009' on page \thepage  undefined on input line 1
-41.
+48.
 
 
 LaTeX Warning: Citation `Kragic2001' on page \thepage  undefined on input line 
-141.
+148.
 
 
-LaTeX Warning: Citation `nguyen' on page \thepage  undefined on input line 144.
+LaTeX Warning: Citation `nguyen' on page \thepage  undefined on input line 151.
 
 
 
 LaTeX Warning: Citation `pollardphd' on page \thepage  undefined on input line 
-145.
+152.
 
 
-LaTeX Warning: Citation `bohg' on page \thepage  undefined on input line 146.
+LaTeX Warning: Citation `bohg' on page \thepage  undefined on input line 153.
 
 
 LaTeX Warning: Citation `huebner2008selection' on page \thepage  undefined on i
-nput line 150.
+nput line 157.
 
 
 LaTeX Warning: Citation `przybylski2010unions' on page \thepage  undefined on i
-nput line 151.
+nput line 158.
 
 
 LaTeX Warning: Citation `goldfeder2007grasp' on page \thepage  undefined on inp
-ut line 151.
+ut line 158.
 
 
 LaTeX Warning: Citation `miller2003automatic' on page \thepage  undefined on in
-put line 152.
+put line 159.
 
 
 LaTeX Warning: Citation `ciocarlie' on page \thepage  undefined on input line 1
-54.
+61.
 
 
-LaTeX Warning: Citation `benamor' on page \thepage  undefined on input line 154
+LaTeX Warning: Citation `benamor' on page \thepage  undefined on input line 161
 .
 
 
 LaTeX Warning: Citation `something' on page \thepage  undefined on input line 1
-59.
+66.
 
 
 LaTeX Warning: Citation `vahrenkamp' on page \thepage  undefined on input line 
-161.
-
-
-LaTeX Warning: Citation `dang' on page \thepage  undefined on input line 161.
+168.
 
 
 LaTeX Warning: Citation `dang' on page \thepage  undefined on input line 168.
 
 
-LaTeX Warning: Citation `antanas' on page \thepage  undefined on input line 173
+LaTeX Warning: Citation `dang' on page \thepage  undefined on input line 175.
+
+
+LaTeX Warning: Citation `antanas' on page \thepage  undefined on input line 180
 .
 
 
-LaTeX Warning: Citation `song' on page \thepage  undefined on input line 179.
+LaTeX Warning: Citation `song' on page \thepage  undefined on input line 186.
 
 
-LaTeX Warning: Citation `levihn' on page \thepage  undefined on input line 182.
+LaTeX Warning: Citation `levihn' on page \thepage  undefined on input line 189.
 
 
 
-LaTeX Warning: Citation `kroemer' on page \thepage  undefined on input line 194
+LaTeX Warning: Citation `kroemer' on page \thepage  undefined on input line 201
 .
 
 
-LaTeX Warning: Citation `bohg' on page \thepage  undefined on input line 194.
+LaTeX Warning: Citation `bohg' on page \thepage  undefined on input line 201.
 
 
-Overfull \hbox (10.50896pt too wide) in paragraph at lines 200--200
+Overfull \hbox (10.50896pt too wide) in paragraph at lines 207--207
 \secfnt ROTATIONALLY SYM-MET-RIC OB-JECTS 
  []
 
@@ -331,7 +368,7 @@ pdfTeX warning: /usr/bin/pdflatex (file ./images/unfolding.pdf): PDF inclusion:
 File: ./images/unfolding.pdf Graphic file (type pdf)
 
 <use ./images/unfolding.pdf>
-Overfull \hbox (4.25291pt too wide) in paragraph at lines 319--319
+Overfull \hbox (4.25291pt too wide) in paragraph at lines 326--326
 []\subsecfnt Modeling Task Con-straints in Cylin-dri-cal Space 
  []
 
@@ -344,36 +381,126 @@ File: ./images/bottlemapping.png Graphic file (type png)
 File: ./images/rotatingWine.png Graphic file (type png)
 
 <use ./images/rotatingWine.png> [4 <./images/bottlemapping.png>] [5 <./images/r
-otatingWine.png>] [6] [7] (./aamas2015.aux)
+otatingWine.png>]
+! Undefined control sequence.
+<argument> ...paces \small Inverse mapping\normal 
+                                                  \strut \algocf@sclfill 
+l.550   }
+         
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...aces \small Goal wrist pose \normal 
+                                                  \strut \algocf@sclfill 
+l.550   }
+         
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...es \small Sample redundancy \normal 
+                                                  \strut \algocf@sclfill 
+l.550   }
+         
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 10000) detected at line 553
+[][]
+ []
+
+! Undefined control sequence.
+<argument> ...Generate maps for each task \normal 
+                                                  \strut \algocf@sclfill 
+l.567   }
+         
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...terate through object height\normal 
+                                                  \strut \algocf@sclfill 
+l.595   }
+         
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...ind grasp pose on 1st object\normal 
+                                                  \strut \algocf@sclfill 
+l.595   }
+         
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...ll Find grasps for each task\normal 
+                                                  \strut \algocf@sclfill 
+l.595   }
+         
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 10000) detected at line 599
+[][]
+ []
+
+[6] [7] [8] (./aamas2015.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 2252 strings out of 495061
- 25828 string characters out of 1182621
- 84742 words of memory out of 3000000
- 5392 multiletter control sequences out of 15000+50000
- 54393 words of font info for 69 fonts, out of 3000000 for 9000
+ 3290 strings out of 495061
+ 38766 string characters out of 1182621
+ 121724 words of memory out of 3000000
+ 6406 multiletter control sequences out of 15000+50000
+ 62507 words of font info for 82 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 39i,10n,26p,490b,276s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 39i,21n,26p,490b,465s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
-ve/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/typ
-e1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texmf-texlive/fonts/type1/publ
-ic/amsfonts/cm/cmmi6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
-cm/cmmi9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr5.pfb>
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/t
-exmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/
-fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-texlive/fonts/type1/
-public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
-nts/cm/cmti9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/
-msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/
-share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-texli
-ve/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/t
-imes/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on aamas2015.pdf (7 pages, 818988 bytes).
+ve/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texmf-texlive/fonts/typ
+e1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/type1/public/am
+sfonts/cmextra/cmex9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cm/cmmi6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi9.pfb
+></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/
+texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-texlive
+/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/
+public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
+nts/cm/cmsy9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti8
+.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/s
+hare/texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/t
+exmf-texlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-texlive/font
+s/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times
+/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/sh
+are/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
+Output written on aamas2015.pdf (8 pages, 851935 bytes).
 PDF statistics:
- 126 PDF objects out of 1000 (max. 8388607)
+ 137 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
