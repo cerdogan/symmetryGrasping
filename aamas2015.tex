@@ -61,6 +61,16 @@ needs avoid grasps that would cover the rim of the object. In contrast, if any o
 involves placing the mug on the table, the robot cannot choose any grasp in which fingers touch the
 mug's base. 
 
+
+\begin{figure}[t]
+  \begin{center}
+    \includegraphics[width=1.0\linewidth]{./images/showOff.png} \quad 
+  \end{center}
+  \caption{The manipulation of a heavy wooden log by two robots, planning for a pair of bimanual grasps}
+  \label{fig:showOff}
+\end{figure}
+
+
 Many grasp representations are based on a floating hand, thereby representing only the
 end-effector and ignoring the embodiment of the entire robot in environment. As a result, infeasible
 grasps are generated and have to be pruned out in a post-processing step. This can be particularly
@@ -77,7 +87,7 @@ the axis of symmetry. \emph{Since the object is symmetric any stable grasp can b
 axis yielding a family of feasible grasps}. We will show that this basic property leads to a
 significant reduction of the search complexity in grasp planning. Specifically, this property allows us
 to generate multiple grasps around the object which is useful for bi-manual tasks and cooperative
-robot hand over tasks. In addition, it allows us to identify a single grasp that is useful for a
+robot hand over tasks. Figure 1 demonstrates an example where a rotationally symmetric log is manipulated by two robots using both arms. In addition, it allows us to identify a single grasp that is useful for a
 sequence of tasks.
 
 
@@ -140,7 +150,7 @@ sequence of tasks.
 %	\item 
 %\end{enumerate}
 %==================================================================================================
-\newpage
+
 \section{Related Work}
 Robot grasping is a heavily studied sub-field of robotics.
 Until recently, most approaches have focused on the problem 
@@ -204,7 +214,7 @@ these studies have mostly focused on how to generate complete
 meshes from partial point clouds.
 
 %==================================================================================================
-\newpage
+
 \section{Manifold Representations for \\Rotationally Symmetric Objects}
 
 Projecting manipulation constraints such as collisions with the environment and robot
@@ -247,8 +257,6 @@ on the bottom surface of the object and the polar axis can be freely chosen with
 %   and angle $\theta$. }
   \label{fig:representation}
 \end{figure}
-
-\newpage
 
 A significant observation about the representation of rotationally symmetric objects in cylindrical
 coordinates is the dependency between the radius $r$ and the height $h$ parameters. For a given shape $S$,
@@ -500,11 +508,25 @@ check for collisions and reachability.
 
 % Pic5: two tasks superimposed on top of each other (manifold pictures and simulation) and one object rotating
 
-\newpage 
 \subsection{Planning for Task Sequences}
 
 Given the feasibility maps for each subtask in a sequence of tasks,  we
-can generate an appropriate grasp by 
+can generate an appropriate grasp by reasoning about the intersections of grasp projections onto the object space. 
+Algorithm 2 uses the precomputed projections of task constraints on the object spaces to reason about how to rotate the objects in the poses constrainted  by the tasks. 
+
+
+\begin{figure}[t]
+  \begin{center}
+    \includegraphics[width=1.0\linewidth]{./images/sequential.png} \quad 
+  \end{center}
+  \caption{Two superimposition of two maps on top of each other as one of the objects move}
+  \label{fig:sequential}
+\end{figure}
+
+
+
+Figure 6 demonstrates the shifting of feasibility maps over each other to find proper grasps that satisfy all the tasks. 
+
 
 %==================================================================================================
 \begin{algorithm}[ht!]
@@ -557,6 +579,13 @@ can generate an appropriate grasp by
 
 
 %==================================================================================================
+\subsection{Reasoning about Handprints for Bimanual Tasks}
+
+Figure 7 demonstrates the projection of handprints onto the surface manifold where two hands
+drawn with blue and yellow profiles can be seen colliding with each other. The algorithm 3
+uses a hill-climbing approach to minimize the intersection of handprints to move the hands
+further away from each other as can be seen on the right hand side of Figure 7. The computation of the hand positions were in average 23 milliseconds especially when there was a large space of feasible grasps.
+
 \begin{algorithm}[ht!]
   \SetCommentSty{emph}
   \KwIn{$\{\hat{h}, \check{h}, \hat{\theta}, \check{\theta}\}$: min/max height and angle limits, 
@@ -619,6 +648,30 @@ can generate an appropriate grasp by
 
 
 
+\begin{figure}[t]
+  \begin{center}
+    \includegraphics[width=1.0\linewidth]{./images/prints.png} \quad 
+  \end{center}
+  \caption{The projection of hand prints onto the object surface and the detection of finger collisions}
+%   \caption{A of a
+%   rotationally symmetric object. The axis $\vech{a}$ corresponds to the polar axis, while $\vech{h}$
+%   is the axis of symmetry. Any point on the surface can be represented using height $h$, radius $r$,
+%   and angle $\theta$. }
+  \label{fig:prints}
+\end{figure}
+
+
+\begin{figure*}[t]
+  \begin{center}
+    \includegraphics[width=0.85\linewidth]{./images/sequence.png} \quad 
+  \end{center}
+  \caption{Computation of a single grasp across multiple tasks where the robot has to pick up a bottle, pour its contents into a bowl and place it down.}
+  \label{fig:sequence}
+\end{figure*}
+
+
+
+
 
 
 
@@ -632,13 +685,9 @@ can generate an appropriate grasp by
 
 % Pic6: Rod through 3 tasks (superimposed)
 
-\newpage
-\subsection{Planning for Bi-Manual and Cooperative Tasks}
 % Pic7: Hand prints of two robots (two different robot hands, robotiq vs. tweezer)
 % Pic8: Picture of two robots in front of each other, hand over
 
-\newpage
-\section{Experiments}
 % offline experiment: how fast is map generation? 
 % online experiment: how fast is sequence generation?
 % quality? how good? alternative solutions?
@@ -672,7 +721,7 @@ to generate low-dimensional grasp representations.
 \section{Conclusion}
 
 In this paper we presented a grasp planning algorithm
-that exploits rotational symmetries for generating task-constrained grasps. The algorithm is particularly suited for grasp planning with several subtasks or several interacting agents. The key insight of the paper is that re-occurring patterns in the geometry of shapes can be exploited to drastically reduce the space of solutions. To this end, we introduced a low-dimensional, object-centered representation for grasp planning which is based on rotational symmetries. Since such object are symmetric, any stable grasp can be rotated around the axis yielding a family of feasible grasps. We presented early results showing that this property allows us to generate multiple grasps around an object, which is useful for bi-manual tasks and cooperative robot hand over tasks.         
+that exploits rotational symmetries for generating task-constrained grasps. One of the major results is presented in Figure 8 where a sequence of tasks have been considered to compute a single grasp that satisfies all of their constraints. The algorithm is particularly suited for grasp planning with several subtasks or several interacting agents. The key insight of the paper is that re-occurring patterns in the geometry of shapes can be exploited to drastically reduce the space of solutions. To this end, we introduced a low-dimensional, object-centered representation for grasp planning which is based on rotational symmetries. Since such object are symmetric, any stable grasp can be rotated around the axis yielding a family of feasible grasps. We presented early results showing that this property allows us to generate multiple grasps around an object, which is useful for bi-manual tasks and cooperative robot hand over tasks.         
 \bibliographystyle{plain}
 \bibliography{aamas2015}
-\end{document}
+\end{document}ibi

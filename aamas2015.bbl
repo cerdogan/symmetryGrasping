@@ -1,0 +1,117 @@
+\begin{thebibliography}{10}
+
+\bibitem{antanas}
+L.~{Antanas}, P.~{Moreno}, M.~{Neumann}, R.~{Pimentel de Figueiredo},
+  K.~{Kersting}, J.~{Santos-Victor}, and L.~{De Raedt}.
+\newblock {High-level Reasoning and Low-level Learning for Grasping: A
+  Probabilistic Logic Pipeline}.
+\newblock {\em ArXiv e-prints}, November 2014.
+
+\bibitem{benamor}
+H.~Ben~Amor, O.~Kroemer, U.~Hillenbrand, G.~Neumann, and J.~Peters.
+\newblock Generalization of human grasping for multi-fingered robot hands.
+\newblock In {\em Intelligent Robots and Systems (IROS), 2012 IEEE/RSJ
+  International Conference on}, pages 2043--2050, Oct 2012.
+
+\bibitem{bohg2011mind}
+Jeannette Bohg, Matthew Johnson-Roberson, Beatriz Le{\'o}n, Javier Felip, Xavi
+  Gratal, N~Bergstrom, Danica Kragic, and Antonio Morales.
+\newblock Mind the gap-robotic grasping under incomplete observation.
+\newblock In {\em Robotics and Automation (ICRA), 2011 IEEE International
+  Conference on}, pages 686--693. IEEE, 2011.
+
+\bibitem{Borst}
+C.~Borst, M.~Fischer, and G.~Hirzinger.
+\newblock Grasp planning: how to choose a suitable task wrench space.
+\newblock In {\em Robotics and Automation, 2004. Proceedings. ICRA '04. 2004
+  IEEE International Conference on}, volume~1, pages 319--325 Vol.1, April
+  2004.
+
+\bibitem{ciocarlie2009}
+Matei~T. Ciocarlie and Peter~K. Allen.
+\newblock Hand posture subspaces for dexterous robotic grasping.
+\newblock {\em Int. J. Rob. Res.}, 28(7):851--867, July 2009.
+
+\bibitem{dang}
+Hao Dang and Peter~K. Allen.
+\newblock Semantic grasping: planning task-specific stable robotic grasps.
+\newblock {\em Autonomous Robots}, 37(3):301--316, 2014.
+
+\bibitem{goldfeder2007grasp}
+Corey Goldfeder, Peter~K Allen, Claire Lackner, and Raphael Pelossof.
+\newblock Grasp planning via decomposition trees.
+\newblock In {\em Robotics and Automation, 2007 IEEE International Conference
+  on}, pages 4679--4684. IEEE, 2007.
+
+\bibitem{huebner2008selection}
+Kai Huebner and Danica Kragic.
+\newblock Selection of robot pre-grasps using box-based shape approximation.
+\newblock In {\em Intelligent Robots and Systems, 2008. IROS 2008. IEEE/RSJ
+  International Conference on}, pages 1765--1770. IEEE, 2008.
+
+\bibitem{Bohg2014}
+T.~Asfour J.~Bohg, A.~Morales and D.~Kragic.
+\newblock Data-driven grasp synthesis – a survey.
+\newblock {\em IEEE Transactions on Robotics}, 30(2):289--309, 2014.
+
+\bibitem{Klank2009}
+U.~Klank, D.~Pangercic, R.B. Rusu, and M.~Beetz.
+\newblock Real-time cad model matching for mobile manipulation and grasping.
+\newblock In {\em Humanoid Robots, 2009. Humanoids 2009. 9th IEEE-RAS
+  International Conference on}, pages 290--296, Dec 2009.
+
+\bibitem{Kragic2001}
+D.~Kragic, AT. Miller, and P.K. Allen.
+\newblock Real-time tracking meets online grasp planning.
+\newblock In {\em Robotics and Automation, 2001. Proceedings 2001 ICRA. IEEE
+  International Conference on}, volume~3, pages 2460--2465 vol.3, 2001.
+
+\bibitem{kroemerHumanoids2012}
+O.~Kroemer, H.~Ben~Amor, M.~Ewerton, and J.~Peters.
+\newblock Point cloud completion using extrusions.
+\newblock In {\em Proceedings of the International Conference on Humanoid
+  Robots (HUMANOIDS)}, 2012.
+
+\bibitem{LevihnIROS13}
+Martin Levihn, Leslie~Pack Kaelbling, Tom\'{a}s Lozano-P\'{e}rez, and Mike
+  Stilman.
+\newblock Foresight and reconsideration in hierarchical planning and execution.
+\newblock In {\em IEEE/RSJ International Conference on Intelligent Robots and
+  Systems}, 2013.
+
+\bibitem{miller2003automatic}
+Andrew~T Miller, Steffen Knoop, Henrik~I Christensen, and Peter~K Allen.
+\newblock Automatic grasp planning using shape primitives.
+\newblock In {\em Robotics and Automation, 2003. Proceedings. ICRA'03. IEEE
+  International Conference on}, volume~2, pages 1824--1829. IEEE, 2003.
+
+\bibitem{nguyen}
+V.-D. Nguyen.
+\newblock Constructing force-closure grasps.
+\newblock In {\em Robotics and Automation. Proceedings. 1986 IEEE International
+  Conference on}, volume~3, pages 1368--1373, Apr 1986.
+
+\bibitem{przybylski2010unions}
+Markus Przybylski, Tamim Asfour, and R{\"u}diger Dillmann.
+\newblock Unions of balls for shape approximation in robot grasping.
+\newblock In {\em Intelligent Robots and Systems (IROS), 2010 IEEE/RSJ
+  International Conference on}, pages 1592--1599. IEEE, 2010.
+
+\bibitem{Sahbani2012}
+A.~Sahbani, S.~El-Khoury, and P.~Bidaud.
+\newblock An overview of 3d object grasp synthesis algorithms.
+\newblock {\em Robot. Auton. Syst.}, 60(3):326--336, March 2012.
+
+\bibitem{song}
+D.~Song, K.~Huebner, V.~Kyrki, and D.~Kragic.
+\newblock Learning task constraints for robot grasping using graphical models.
+\newblock In {\em Intelligent Robots and Systems (IROS), 2010 IEEE/RSJ
+  International Conference on}, pages 1579--1585, Oct 2010.
+
+\bibitem{Vahrenkamp12d}
+Nikolaus Vahrenkamp, Tamim Asfour, and R\"udiger Dillmann.
+\newblock Simultaneous grasp and motion planning.
+\newblock {\em IEEE Robotics and Automation Magazine - Special Issue on Mobile
+  Manipulation}, pages 43--57, 2012.
+
+\end{thebibliography}
