@@ -160,7 +160,7 @@ cylindrical coordinate system. We will therefore start by introducing cylindrica
 
 \begin{figure}[ht!]
   \begin{center}
-    \includegraphics[width=0.8\linewidth]{./images/representation.png} \quad 
+    \includegraphics[width=1.0\linewidth]{./images/representation.png} \quad 
   \end{center}
   \caption{A cylindrical coordinate system used to parameterize points on the surface of a
   rotationally symmetric object. The axis $\vech{a}$ corresponds to the polar axis, while $\vech{h}$
