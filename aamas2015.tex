@@ -464,6 +464,14 @@ complex task a corresponding feasibility map. Feasibility
 maps can, then, be collectively analyzed in order to identify
 a grasp that is fulfills the constraints of current and future actions.
 
+The first step in grasp planning is to generate the feasibility
+map for each sub-task. Algorithm~\ref{alg:feasibility} shows 
+how a binary 2D feasibility map can be generated. The idea is
+to discretize the low-dimensional manifold, map the center
+of each cell back into the high-dimensional space and then
+check for collisions and reachability.   
+
+
 
 %==================================================================================================
 \begin{algorithm}[ht!]
@@ -487,9 +495,16 @@ a grasp that is fulfills the constraints of current and future actions.
     $h \leftarrow h + \delta h;$
   }
   \Return{$M$}; 
-  \caption{CreateMap(): Generates feasibility maps}
+  \caption{CreateMap(): Generates feasibility maps \label{alg:feasibility}}
 \end{algorithm}
 
+% Pic5: two tasks superimposed on top of each other (manifold pictures and simulation) and one object rotating
+
+\newpage 
+\subsection{Planning for Task Sequences}
+
+Given the feasibility maps for each subtask in a sequence of tasks,  we
+can generate an appropriate grasp by 
 
 %==================================================================================================
 \begin{algorithm}[ht!]
@@ -614,10 +629,7 @@ a grasp that is fulfills the constraints of current and future actions.
 
 
 
-% Pic5: two tasks superimposed on top of each other (manifold pictures and simulation) and one object rotating
 
-\newpage 
-\subsection{Planning for Task Sequences}
 % Pic6: Rod through 3 tasks (superimposed)
 
 \newpage
