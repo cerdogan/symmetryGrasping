@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.2.27)  18 NOV 2014 01:09
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.2.27)  18 NOV 2014 01:52
 entering extended mode
  %&-line parsing enabled.
 **aamas2015.tex
@@ -255,7 +255,7 @@ pdfTeX warning: /usr/bin/pdflatex (file ./images/unfolding.pdf): PDF inclusion:
 File: ./images/unfolding.pdf Graphic file (type pdf)
 
 <use ./images/unfolding.pdf>
-Overfull \hbox (4.25291pt too wide) in paragraph at lines 257--257
+Overfull \hbox (4.25291pt too wide) in paragraph at lines 260--260
 []\subsecfnt Modeling Task Con-straints in Cylin-dri-cal Space 
  []
 
@@ -276,7 +276,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  2233 strings out of 495061
  25599 string characters out of 1182621
- 84730 words of memory out of 3000000
+ 84734 words of memory out of 3000000
  5373 multiletter control sequences out of 15000+50000
  54393 words of font info for 69 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
@@ -295,7 +295,7 @@ onts/symbols/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb
 e/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/font
 s/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/ut
 mri8a.pfb>
-Output written on aamas2015.pdf (7 pages, 801509 bytes).
+Output written on aamas2015.pdf (7 pages, 803756 bytes).
 PDF statistics:
  122 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

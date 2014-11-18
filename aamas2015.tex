@@ -300,21 +300,80 @@ A crucial property of this representation is that the produced map can
 be efficiently updated when the object is rotated around its axis of symmetry. More specifically, a
 rotation around the z-axis corresponds to a shift along the $\theta$ dimension. 
 
-%==================================================================================================
-\newpage
-\subsubsection{Extrapolating task constraints to different \\object rotations}
-
 \begin{figure*}[t]
   \begin{center}
     \includegraphics[width=0.75\linewidth]{./images/rotatingWine.png} \quad
   \end{center}
-  \caption{The points on the 3D surface (left) are projected onto a 2D cylindrical manifold.}
+%   \caption{The points on the 3D surface (left) are projected onto a 2D cylindrical manifold.}
   \label{fig:unfolding} 
 \end{figure*}
 
+%==================================================================================================
+\newpage
+\subsubsection{Extrapolating task constraints to different \\object rotations}
 
+The analysis of grasp feasibility for a given object pose and task description can be utilized to reason
+about grasp selection if the object is rotated only around its axis of symmetry. The idea is that the 
+coupling between the rotation of the grasp around the object pose and the rotation of the object around
+its own principle axis can be utilized to generate previously examined grasps for new object rotations
+and to adopt the successful examples. The invariance of task constraint effects on gripper-object
+systems to interactions between the gripper and the object poses that do not change gripper configuration
+in the task space can be analyzed formally. 
+
+Let the function $m: \mathbb{S}, SE(3) \rightarrow \{0,1\}$ represent a mapping from a 6-DOF object
+pose $T^w \in SE(3)$ and a contact pose on the object surface, $\vech{x} = [h, \theta]^T \in \mathbb{S}$,
+to a binary evaluation of whether a grasp is feasible. The feasibility of a grasp may depend on a variety
+of criteria such as inverse kinematics, collisions, torque limits, manipulability and etc. In this work,
+we focus on collision-free inverse kinematics and define the operator $ik: SE(3) \rightarrow \{0,1\}$
+that evaluates whether an arm configuration exists that can achieve the end-effector pose $T^w_e \in SE(3)$. 
+
+We claim that given the mapping of feasibility grasps for an initial object pose $T^w_o$, the feasibility of any 
+grasp $x \in \mathbb{S}$, for a new pose $T^w_{o_2}$, can be deduced by using the previous mapping:
+
+\begin{equation}
+  m([h,\theta],T^w_{o_2}) = m([h,\theta+\delta], T^w_o)
+\end{equation}
+
+\noindent where $T^w_{o_2} = T^w_o ~ R^z(\delta)$ where $R^z$ is a rotation matrix around the local $z-axis$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%==================================================================================================
 % cyclic manifold 
-\begin{enumerate}
+% \begin{enumerate}
 %   \item Define frames $L$ and $G$ as local object frame and global frame
 %   \begin{enumerate}
 %     \item 
@@ -358,14 +417,14 @@ rotation around the z-axis corresponds to a shift along the $\theta$ dimension.
 % 		\item 
 % 	\end{enumerate}
 	
-	\item Low-dimensional manifold for grasps on symmetric objects	
-	\begin{enumerate}
-	\item Let $\vech{x} \in \set{S}, where \vech{x} = [h, \theta]^T$
-	\item $h$ is the height of the contact point along the axis of symmetry
-	\item $r$
-	\end{enumerate}
+% 	\item Low-dimensional manifold for grasps on symmetric objects	
+% 	\begin{enumerate}
+% 	\item Let $\vech{x} \in \set{S}, where \vech{x} = [h, \theta]^T$
+% 	\item $h$ is the height of the contact point along the axis of symmetry
+% 	\item $r$
+% 	\end{enumerate}
 
-\end{enumerate}
+% \end{enumerate}
 
 % name it!
 % unwrapping introduces a nonlinear warping
