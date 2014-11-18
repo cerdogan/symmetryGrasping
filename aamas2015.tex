@@ -159,7 +159,7 @@ parameters where a vector $\vech{z}$ represents the principal orientation and th
 $\vech{a}$ captures the secondary direction in the reference plane perpendicular to $\vech{z}$. 
 Using their intersection $o$ as the origin, any point in the Euclidean coordinate system can
 be represented in this coordinate system by computing the projection of the point onto the
-$\vech{z}$ axis, its distance to the origin, and the angle between the $\vech{a}$ axes and its
+$\vech{z}$ axis, its distance to the axis, and the angle between the polar axis $\vech{a}$ and its
 projection onto the reference plane. 
 
 Figure \ref{fig:representation} demonstrates the representation
@@ -172,9 +172,10 @@ direction.
 
 \begin{figure}[ht!]
   \begin{center}
-    \includegraphics[width=0.8\linewidth]{./images/representation.png} \quad 
+    \includegraphics[width=0.75\linewidth]{./images/representation.png} \quad 
   \end{center}
-%   \caption{A cylindrical coordinate system used to parameterize points on the surface of a
+  \caption{Cylindrical coordinate system to parameterize points on a rotationally symmetric object}
+%   \caption{A of a
 %   rotationally symmetric object. The axis $\vech{a}$ corresponds to the polar axis, while $\vech{h}$
 %   is the axis of symmetry. Any point on the surface can be represented using height $h$, radius $r$,
 %   and angle $\theta$. }
@@ -185,88 +186,132 @@ direction.
 
 A significant observation about the representation of rotationally symmetric objects in cylindrical
 coordinates is the dependency of the radius $r$ and the height $h$ parameters. For a given shape $S$,
-the distance of any point $p$ from the origin, $r$, is a function of the height of the point, $h$, 
-along the princial axis $\vech{z}$: $r = r_S(h)$. This function represents the inherent curvature of
-the shape - for instance, for a cylinder, $r = c$ for some constant $c$. Based on this observation,
-we can conclude that any contact point $p$ on an object shape $S$ can in fact be parameterized
-minimally by two variables, $h$ and $\theta$...
+all the points on $S$, at some height $h$ along the principal axis $\vech{z}$, have the same distance
+$r$ to the axis: $\forall p \in S$ s.t. $p \cdot \vech{z} = h$, $dist(p, \vech{z}) = r_S(h)$. The
+function $r_S(h)$ represents the inherent curvature of the shape - for instance, for a cylinder, $r
+= c$ for some constant $c$. Based on this observation, we can conclude that any contact point $p$ on
+an object shape $S$ can in fact be parameterized minimally by two variables, $h$ and $\theta$.
+In this work, we show that analyzing the task constraints, robot limitations and contact models 
+in this low-dimensional subspace leads to significant efficiency gains in grasp planning.
 
-Using the principal axis $\vech{z}$, the polar axis $\vech{a}$, and their cross-product, we can define
-the local object frame $L$ in the Euclidean coordinate frame. Transforming the coordinates of
-a point in the Euclidean world frame $p^w$ to the local object frame $p^l$, and then finally utilizing
-the cylindrical 
+%==================================================================================================
+\subsubsection{Mapping Euclidean Coordinates to Reduced \\Cylindrical Space}
 
+To reason about tasks traditionally expressed in Euclidean coordinates, we introduce a mapping 
+between the representation of a point in the Euclidean world frame, $p_w$, to the $\vech{x} = [h,\theta]^T$
+parameters in the reduced cylindrical space $\mathbb{S}$. First, we define the local object frame $L$ in the
+Euclidean coordinate frames by using the principal axis $\vech{z}$, the polar axis $\vech{a}$, and
+their cross-product. Given the pose of an object in the world coordinates, $T^w_l$, we can first
+transform the point into the local object space, $p^l = T^l_w ~ p^w$, and then map it to the surface
+representation $\vech{x}$ using the function $f: \mathbb{R}^3 \rightarrow \mathbb{S}$: 
 
-The manifold representation which will be discussed in the remainder of the paper is based on a
-cylindrical coordinate system. We will therefore start by introducing cylindrical coordinates. 
+% TODO Add [h \theta] to this equation?
+\begin{equation}
+  f(\vech{p}^l) = f([x,y,z]^T) = \left[ \begin{array}{c} z \\ atan2(y,x) \end{array}\right].
+\end{equation}
 
- 
-Let $\vech{z}$ be the axis of symmetry, $\vech{o}$ be the origin, and $\vech{a}$ be the polar axis
-of the object. The polar axis lies in the reference plane of the object and is perpendicular to
-$\vech{z}$. Subsequently, we assume that the reference plane is the base of object. Note that
-$\vech{a}$ can be arbitrarily chosen, since the object is symmetric. Using $\vech{z}$, $\vech{a}$
-and their cross-product, we can form a local coordinate frame $L$ for an object. Any point $\vech{p} =
-[x,y,z]^T$ in the local coordinate frame $L$, can also be represented using a cylindrical
-parametrization of the coordinate system. 
-
-This parametrization leads to a point $[h, r, \theta]^T$ whose components correspond to the height,
-radius and angle of the point respectively as seen in Fig.~\ref{fig:cylindricalcs}. The height is
-measured along the axis of symmetry $\vech{z}$, the radius $r$ is the distance between $\vech{p}$
-and $\vech{z}$, the angle $\theta$ is the angle between $\vech{a}$ and the projection of $\vech{p} $
-onto the local reference plane of the object as can be seen in Fig.~\ref{fig:cylindricalcs}.
-
-In the following, we define the radius as a function $r(h)$ of the height, which results in a
-two-dimensional parametrization $[h, \theta]^T \in \mathbb{S}$ of point $\vech{p}$. Subsequently, we
-can define the function $f: \mathbb{S} \rightarrow \mathbb{R}^3$ that maps the cylindrical
-coordinates to the 3D local coordinates in the following way:
+Once a planner reasons about the environment and a contact point is determined in the cylindrical surface representation,
+we need to map it back to the Euclidean space using an inverse mapping $f^{-1}: \mathbb{S} \rightarrow \mathbb{R}^3 $:
 
 \begin{equation}
-  f(\vech{x}) = f([h, \theta]^T) = \left[ 
+  f^{-1}(\vech{x}) = f^{-1}([h, \theta]^T) = \left[ 
   \begin{array}{c}
-  (h) ~ cos(\theta) \\ r(h) ~ sin(\theta)\\ h 
+  r(h) ~ cos(\theta) \\ r(h) ~ sin(\theta)\\ h 
   \end{array} \right]. 
 \end{equation}
 
-Similarly, we can map from the 3D local coordinate space $L$ back to the surface manifold using the
-inverse mapping, $f^{-1}: \mathbb{R}^3 \rightarrow \mathbb{S}$:
-
-\begin{equation}
-  f^{-1}(\vech{p}) = f^{-1}([x,y,z]^T) = \left[ \begin{array}{c} z \\ atan2(y,x) \end{array}\right].
-\end{equation}
-
-The assumption of rotational symmetry along with the definition of the radius as a function of the
-height reduces the our parametrization to two variables. Fig.~\ref{fig:unfolding} depicts the mapping of a 3D
-cylinder onto the 2D manifold. In the next section, we will see how this can exploited for
-generating grasps.
+Fig.~\ref{fig:unfolding} depicts the forward mapping process starting from the representation of
+a contact point in the world coordinate frame, moving to the local object frame and finally transformed
+to the cylindrical surface representation. Observe that the surface of the example soda can be unwrapped
+into a smooth finite two-dimensional plane with minimal distortion because the object is rotationally
+symmetric, and does not have protrusions nor cavities. 
 
 \begin{figure}[ht!]
   \begin{center}
     \includegraphics[width=0.45\textwidth]{./images/unfolding.pdf} \quad
   \end{center}
-  \caption{The points on the 3D surface (right) are projected onto a two-dimensional manifold using a cylindrical coordinate system.}
+  \caption{The points on the 3D surface (left) are projected onto a 2D cylindrical manifold.}
   \label{fig:unfolding} 
 \end{figure}
 
+%==================================================================================================
 \subsection{Grasp Manifold}
-In this section, we demonstrate how to exploit the introduced representation and the symmetry
-properties of the object to efficiently sample feasible grasps. The key insight is that stable
-grasps can be rotated around the axis of symmetry without having to modify the hand shape. We begin
-the analysis with a simplified model where a point on the surface corresponds to a wrist
-position during grasping. Moreover, the hand is assumed to be parallel to the base of the object such that the
-plane between the grasping fingers is perpendicular to the axis of symmetry. 
 
-The goal is to identify
-the set of feasible points the robot can grasp. This requires reasoning about reachability and
-collisions, where we need to ensure that there is a collision-free arm pose with the wrist touching
-the respective surface point. To sample this space, we propose discretizing the manifold by fixed
+\textit{Stable grasps can be rotated around the principle axis of rotationally symmetric objects
+without having to modify the hand shape}. Moreover, the relative rotation between a predefined grasp
+and an object can be captured with a simple linear motion model in the reduced 2D cylindrical
+manifold. To demonstrate the advantages of these key ideas, we begin our analysis with a simplified
+manipulation model where a point on the object surface corresponds to a wrist position during
+grasping. Moreover, the hand is assumed to be parallel to the base of the object such that the plane
+between the grasping fingers is perpendicular to the axis of symmetry. 
+
+Given a predefined hand shape and a task definition, the planner needs to choose a contact point,
+$\vech{x} = [h, \theta]$, that represents its wrist position. Feasible contact points are characterized
+by collision-free inverse kinematic solutions where at least one manipulator pose should exist that 
+both reaches the desired point and does not collide with the environment. In addition to the physical
+feasibility of a contact point, its functionality towards accomplishing tasks also needs to be
+taken into account in grasp selection. For instance, if an object is picked with the purpose of
+placing it down in another cluttered environment, collisions in the second scene also need to be
+accounted for. Similarly, a task may require an object to be configured at a specific pose, i.e.
+pouring water from a bottle to a cup, in which case the planner should account for the reachability of
+that pose with the \textit{foresight} that the same grasp would have to be utilized. 
+
+%==================================================================================================
+\subsubsection{Modeling Task Constraints in Cylindrical Space}
+
+Most everyday grasps require reasoning about multiple tasks even though the tasks may take place in
+substantially different environments with varying constraints on the pose of the manipulated
+object. Although the locations and requirements of the tasks may vary, they all impose constraints 
+on the same gripper-object system since once an object is picked, the grasp cannot be changed. 
+We exploit the \textit{invariance} of the gripper-object relationship in manipulation tasks with 
+rotationally symmetric objects, where the task descriptions naturally account for all the degrees 
+of freedom but the rotation around axis of symmetry since the rotation does not effect object
+properties. The goal is to autonomously exploit the under-constrained task specifications by
+planning for object rotations and grasp positions. 
+
+By only modeling grasps that are perpendicular to the axis of symmetry, e.g. grasp
+rotates around object, we induce a coupling between gripper and object poses. Now, \textit{given a
+single pair of gripper and object poses that is known to satisfy task constraints, an infinite
+number of new pairs can be generated by rotating the gripper around the object by some $\theta$ degrees and rotating the object
+around itself by $-\theta$}. Moreover, by determining the feasible set of contacts for an initial object
+pose which satisfies task requirements, we can extrapolate to a family of object rotations
+and corresponding contact placements. This extrapolation is only feasible because the rotation
+of the object around its axis and the rotation of the grasp around the object are coupled by 
+the $\theta$ variable around the principle axis $\vech{z}$ and thus, we reason about task
+constraints in the cylindrical parameter space.
+
+The idea is as follows. For each task.... 
+To sample this space, we propose discretizing the manifold by fixed
 step sizes for the height $h$ and the angle $\theta$. Refer to picture. For each patch of the
 discretized manifold, using the center point  as the reference for the wrist, we attempt to compute
 a collision-free inverse kinematics solution. Refer to picture again showing red/blue and which
 collisions were caused. 
 
+\begin{figure}[ht!]
+  \begin{center}
+    \includegraphics[width=0.45\textwidth]{./images/bottlemapping.png} \quad
+  \end{center}
+  \caption{The points on the 3D surface (left) are projected onto a 2D cylindrical manifold.}
+  \label{fig:unfolding} 
+\end{figure}
+
+
 A crucial property of this representation is that the produced map can
 be efficiently updated when the object is rotated around its axis of symmetry. More specifically, a
 rotation around the z-axis corresponds to a shift along the $\theta$ dimension. 
+
+%==================================================================================================
+\newpage
+\subsubsection{Extrapolating task constraints to different \\object rotations}
+
+\begin{figure*}[t]
+  \begin{center}
+    \includegraphics[width=0.75\linewidth]{./images/rotatingWine.png} \quad
+  \end{center}
+  \caption{The points on the 3D surface (left) are projected onto a 2D cylindrical manifold.}
+  \label{fig:unfolding} 
+\end{figure*}
+
 
 % cyclic manifold 
 \begin{enumerate}
