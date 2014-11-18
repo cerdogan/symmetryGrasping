@@ -632,16 +632,35 @@ a grasp that is fulfills the constraints of current and future actions.
 % quality? how good? alternative solutions?
 % Pic8: 3D blob
 % 2 different domains
- 
- \newpage
-\section{Discussion}
-% this representation introduces warping effects
-% talk about variable radius objects (picture)
-% hierarchical grid, importance, details lost
-% using profile instead of height
-\newpage
-\section{Conclusions}
 
+\section{Discussion} 
+The presented planner can be seen as a first prototype of grasp planning
+algorithms that exploit symmetry and other shape properties. The main contribution
+is a low-dimensional representation that allows us to store and 
+analyze information about grasp feasibility for sequential or parallel 
+grasping actions. While we showed that this can be used for efficient planning, there
+are various aspects of our approach that need further investigation. At the moment 
+we assume a discretization of the manifold. It is unclear how this discretization affects
+the robot performance and how the discretization parameters need to be chosen. 
+So far, we have shown that grasps can be rotated around the axis of symmetry
+without modification. However, if the hand is moving up and down along the axis
+of symmetry, the hand shape might have to be changed. This is particularly true in
+cases where the object radius drastically changes, i.e. very curvy objects. In such 
+cases, the hand shape needs to be adapted to the new radius. We believe that, similar
+to the HSV color space in computer vision, we can create a 3D space which augments
+the current manifold with another dimension for the radius at different heights.
+This would allow us to model hand shape variations along the axis of symmetry.
+So far, our study has shown that object-centered representations can be very powerful
+representations for grasp planning. However, we believe that more interesting 
+properties and insights about such representations can possibly be identified.
+The key to grasp planning with foresight, is to use prior knowledge about 
+re-occurring and natural shape properties, e.g. symmetries and extrusions, 
+to generate low-dimensional grasp representations. 
+
+\section{Conclusion}
+
+In this paper we presented a grasp planning algorithm
+that exploits rotational symmetries for generating task-constrained grasps. The algorithm is particularly suited for grasp planning with several subtasks or several interacting agents. The key insight of the paper is that re-occurring patterns in the geometry of shapes can be exploited to drastically reduce the space of solutions. To this end, we introduced a low-dimensional, object-centered representation for grasp planning which is based on rotational symmetries. Since such object are symmetric, any stable grasp can be rotated around the axis yielding a family of feasible grasps. We presented early results showing that this property allows us to generate multiple grasps around an object, which is useful for bi-manual tasks and cooperative robot hand over tasks.         
 \bibliographystyle{plain}
 \bibliography{aamas2015}
 \end{document}
