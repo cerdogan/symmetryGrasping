@@ -528,6 +528,7 @@ mapping can be reduced from the inverse kinematics formulation.
 % =================================================================================================
 \section{Task Planning with Grasp Manifolds}
 
+%==================================================================================================
 \begin{algorithm}[ht!]
   \SetCommentSty{emph}
   \KwIn{$\{\hat{h}, \check{h}, \hat{\theta}, \check{\theta}\}$: min/max height and angle limits, 
@@ -538,8 +539,8 @@ mapping can be reduced from the inverse kinematics formulation.
       $p^l \leftarrow [r cos(\theta), r sin(\theta), h]^T;$ \tcp*[f]{\small Inverse mapping\normal}\\
       $p^w \leftarrow W.objectPose() * p^l$; \tcp*[f]{\small Goal wrist pose \normal} \\
       \For(\tcp*[f]{\small Sample redundancy \normal}){$\phi \leftarrow 0$ \KwTo $2 \pi$} {
-	$q \leftarrow R.analyticalIK(W.objectPose(), p^w, \phi);$ \\
-	\If{W.collisionFree(q)} {
+	$R.analyticalIK(W.objectPose(), p^w, \phi);$ \\
+	\If{W.collisionFree()} {
 	  $M[(h-\hat{h})/\delta h][(\theta-\hat{\theta})/\delta \theta] \leftarrow 1;$ \\
 	  \textbf{jump to line 2};
 	}
@@ -553,7 +554,7 @@ mapping can be reduced from the inverse kinematics formulation.
 \end{algorithm}
 
 
-
+%==================================================================================================
 \begin{algorithm}[ht!]
   \SetCommentSty{emph}
   \KwIn{$\{\hat{h}, \check{h}, \hat{\theta}, \check{\theta}\}$: min/max height and angle limits, 
@@ -573,6 +574,7 @@ mapping can be reduced from the inverse kinematics formulation.
 	$\theta^* \leftarrow \theta;$ \\ 
 	\textbf{break;} \\
       }
+      $\theta \leftarrow \theta + \delta \theta;$ \\
     }
     \lIf{$\theta^* = -1$}
       \textbf{continue;} \\
@@ -585,19 +587,71 @@ mapping can be reduced from the inverse kinematics formulation.
 	$\mathbb{\delta}_i \leftarrow \theta - \theta^*;$ \\ 
 	\textbf{break;} \\
       }
+      $\theta \leftarrow \theta + \delta \theta;$ \\
     }
     \If{$\mathbb{\delta}_i = \emptyset$} {
 	  $foundAll \leftarrow false;$ \\	
 	  \textbf{break;}\\
 	}
     }
-    \lIf{$foundAll$} \textbf{return} $\{h,\theta^*,\delta_i ~ \forall i\};$
+    \lIf{$foundAll$} \textbf{return} $\{h,\theta^*,\delta_i ~ \forall i\};$\\
+    $h \leftarrow h + \delta h;$
   }
    
   \Return{$\emptyset$}; 
-  \caption{SingleGrasp(): Grasp for sequential tasks}
+  \caption{Single Grasp for Sequential Tasks}
 \end{algorithm}
 
+
+
+%==================================================================================================
+\begin{algorithm}[ht!]
+  \SetCommentSty{emph}
+  \KwIn{$\{\hat{h}, \check{h}, \hat{\theta}, \check{\theta}\}$: min/max height and angle limits, 
+  $\{\delta h, \delta \theta\}$: increments, $\mathbb{R}$: robots, $W$: world,
+  \\ \hspace{3.5em} $\mathbb{H}$: hand prints}
+  \KwResult{$\{h_i, \theta_i\}$: grasp poses for each robot}
+  
+  \For(\tcp*[f]{\small Generate maps for each robot \normal}){$R \in \mathbb{R}$, $i \leftarrow 0$} {
+    $M[i] = $CreateMap$(\hat{h}, \check{h}, \hat{\theta}, \check{\theta}, R, W);$\\
+    $i \leftarrow i + 1$; 
+  }
+  
+  \For{$restart \leftarrow 0$ \KwTo MAX\_RESTARTS} {
+  \BlankLine
+    \For(\tcp*[f]{\small Sample contacts \normal}){robot $R \in \mathbb{R}$, $i \leftarrow 0$} {
+      $[h_i, \theta_i] \leftarrow random(\hat{h}, \check{h}, \hat{\theta}, \check{\theta}, \delta h, \delta \theta);$ \\
+      $i \leftarrow i + 1$;\\ 
+    }
+    \BlankLine
+    \For{$iters \leftarrow 0$ \KwTo MAX\_ITERS} {  
+      
+      \lIf{$W.collisionFree()$} \textbf{return } $\{h_i, \theta_i\}$;\\ 
+      \BlankLine
+      $R \leftarrow \mathbb{R}[random()]$;  \\
+      $dirs \leftarrow [\{\delta h,0\}, \{0, \delta \theta\}, \{-\delta h, 0\}, \{0, -\delta \theta\}]$; \\
+      
+      $minError \leftarrow \infty, ~ bestDir \leftarrow \emptyset; $ \\
+      \For{$dir \in dirs$} {
+	  
+	$h^* \leftarrow h_R + dir[0], ~\theta^* \leftarrow \theta_R + dir[1];$ \\
+	\lIf{$M[(h^*-\hat{h})/\delta h][(\theta^*-\hat{\theta})/\delta \theta] = 0;$}
+	  \textbf{continue;} 
+	
+	$error \leftarrow $computeError($W$); \\
+	\If{$error < minError$} {
+	  $minError \leftarrow error;$ \\
+	  $bestDir \leftarrow dir;$
+	}
+      }
+      
+    }
+  }
+  
+  
+  \Return{$\emptyset$}; 
+  \caption{Collaborative Grasps on Single Task}
+\end{algorithm}
 
 
 

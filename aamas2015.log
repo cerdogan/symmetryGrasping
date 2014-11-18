@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.2.27)  18 NOV 2014 04:25
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.2.27)  18 NOV 2014 05:14
 entering extended mode
  %&-line parsing enabled.
 **aamas2015.tex
@@ -385,7 +385,7 @@ otatingWine.png>]
 ! Undefined control sequence.
 <argument> ...paces \small Inverse mapping\normal 
                                                   \strut \algocf@sclfill 
-l.550   }
+l.551   }
          
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -396,7 +396,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> ...aces \small Goal wrist pose \normal 
                                                   \strut \algocf@sclfill 
-l.550   }
+l.551   }
          
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -407,7 +407,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> ...es \small Sample redundancy \normal 
                                                   \strut \algocf@sclfill 
-l.550   }
+l.551   }
          
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -416,14 +416,14 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Underfull \hbox (badness 10000) detected at line 553
+Underfull \hbox (badness 10000) detected at line 554
 [][]
  []
 
 ! Undefined control sequence.
 <argument> ...Generate maps for each task \normal 
                                                   \strut \algocf@sclfill 
-l.567   }
+l.568   }
          
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -434,7 +434,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> ...terate through object height\normal 
                                                   \strut \algocf@sclfill 
-l.595   }
+l.599   }
          
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -445,7 +445,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> ...ind grasp pose on 1st object\normal 
                                                   \strut \algocf@sclfill 
-l.595   }
+l.599   }
          
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -456,7 +456,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> ...ll Find grasps for each task\normal 
                                                   \strut \algocf@sclfill 
-l.595   }
+l.599   }
          
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -465,7 +465,34 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Underfull \hbox (badness 10000) detected at line 599
+Underfull \hbox (badness 10000) detected at line 603
+[][]
+ []
+
+! Undefined control sequence.
+<argument> ...enerate maps for each robot \normal 
+                                                  \strut \algocf@sclfill 
+l.618   }
+         
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...aces \small Sample contacts \normal 
+                                                  \strut \algocf@sclfill 
+l.649   }
+         
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 10000) detected at line 654
 [][]
  []
 
@@ -477,11 +504,11 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  3290 strings out of 495061
  38766 string characters out of 1182621
- 121724 words of memory out of 3000000
+ 125724 words of memory out of 3000000
  6406 multiletter control sequences out of 15000+50000
  62507 words of font info for 82 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 39i,21n,26p,490b,465s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 39i,21n,26p,490b,471s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
 ve/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texmf-texlive/fonts/typ
 e1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/type1/public/am
@@ -498,7 +525,7 @@ exmf-texlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-texlive/font
 s/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times
 /utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/sh
 are/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on aamas2015.pdf (8 pages, 851935 bytes).
+Output written on aamas2015.pdf (8 pages, 855837 bytes).
 PDF statistics:
  137 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
