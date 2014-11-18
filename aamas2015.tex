@@ -395,20 +395,25 @@ grasp $x \in \mathbb{S}$, for a new pose $T^w_{o_2}$, can be deduced by using th
 
 \noindent where $T^w_{o_2} = T^w_o R^z(\delta)$ where $R^z(\delta)$ is a rotation matrix around the
 local $z-axis$ by angle $\delta$ (the notation $T^z(\delta)$ also represents a
-transformation matrix with the rotation $R^z(\delta)$ but no translation). This claim can be proven
-by showing that the rotations of the gripper and the object counteract each other:
+transformation matrix with the rotation $R^z(\delta)$ but no translation). The claim is proven
+by showing that the gripper and object rotations counteract each other:
 
 \begin{alignat}{2}
-  m(&[h,\theta]^T,T^w_{o_2}) 	=	\\
+  m(&[h,\theta]^T,T^w_{o_2}) 	=	\notag \\
 				&= ik(R^w_{o_2} R^z(\theta), 			&&T^w_{o_2} f^{-1}([h,\theta]^T)) \\
-				&= ik(R^w_o R^z(\delta) R^z(\theta), 		&&T^w_{o_2} T^z(-\delta) f^{-1}([h,\theta+\delta]^T)) \\
-				&= ik(R^w_o R^z(\theta) R^z(\delta), 		&&T^w_o f^{-1}([h,\theta+\delta]^T)) \\
+				&= ik(R^w_o R^z(\delta) R^z(\theta), 		~&&T^w_{o_2} T^z(-\delta) f^{-1}([h,\theta+\delta]^T)) \label{eq:proof_key} \\
 				&= ik(R^w_o R^z(\theta+\delta), 		&&T^w_o f^{-1}([h,\theta+\delta]^T)) \\
-				&= m([h,\theta+\delta]^T, T^w_o) 				
+				&= m([h,\theta+\delta]^T, T^w_o). 				
 \end{alignat}
 
-    
-
+The proof starts by reducing the mapping to the inverse kinematics problem where the wrist orientation is computed
+in the world coordinate frame by composing the second object rotation $R^w_{o_2}$ with the contact angle offset $\theta$. Similarly,
+the end-effector position is computed by composing the second object transform $T^w_{o_2}$ with the contact position
+in the local coordinates obtained with inverse cylindrical mapping $T^{o_2} = f^{-1}([h,\theta]^T)$. The key
+insight takes place in Equation \ref{eq:proof_key} where the cylindrical object representation is rotated by $\delta$
+degrees all the while the pose of the object is rotated in the opposite direction by composing with
+$T^z(-\delta)$. Equations 6 and 7 simply reorganize the terms to show that the initial feasibility
+mapping can be reduced from the inverse kinematics formulation.
 
 
 

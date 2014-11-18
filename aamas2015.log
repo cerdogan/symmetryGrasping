@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.2.27)  18 NOV 2014 02:27
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.2.27)  18 NOV 2014 03:01
 entering extended mode
  %&-line parsing enabled.
 **aamas2015.tex
@@ -240,7 +240,83 @@ LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <9> not available
 
 
 ]
-Overfull \hbox (10.50896pt too wide) in paragraph at lines 141--141
+
+LaTeX Warning: Citation `Klank2009' on page \thepage  undefined on input line 1
+41.
+
+
+LaTeX Warning: Citation `Kragic2001' on page \thepage  undefined on input line 
+141.
+
+
+LaTeX Warning: Citation `nguyen' on page \thepage  undefined on input line 144.
+
+
+
+LaTeX Warning: Citation `pollardphd' on page \thepage  undefined on input line 
+145.
+
+
+LaTeX Warning: Citation `bohg' on page \thepage  undefined on input line 146.
+
+
+LaTeX Warning: Citation `huebner2008selection' on page \thepage  undefined on i
+nput line 150.
+
+
+LaTeX Warning: Citation `przybylski2010unions' on page \thepage  undefined on i
+nput line 151.
+
+
+LaTeX Warning: Citation `goldfeder2007grasp' on page \thepage  undefined on inp
+ut line 151.
+
+
+LaTeX Warning: Citation `miller2003automatic' on page \thepage  undefined on in
+put line 152.
+
+
+LaTeX Warning: Citation `ciocarlie' on page \thepage  undefined on input line 1
+54.
+
+
+LaTeX Warning: Citation `benamor' on page \thepage  undefined on input line 154
+.
+
+
+LaTeX Warning: Citation `something' on page \thepage  undefined on input line 1
+59.
+
+
+LaTeX Warning: Citation `vahrenkamp' on page \thepage  undefined on input line 
+161.
+
+
+LaTeX Warning: Citation `dang' on page \thepage  undefined on input line 161.
+
+
+LaTeX Warning: Citation `dang' on page \thepage  undefined on input line 168.
+
+
+LaTeX Warning: Citation `antanas' on page \thepage  undefined on input line 173
+.
+
+
+LaTeX Warning: Citation `song' on page \thepage  undefined on input line 179.
+
+
+LaTeX Warning: Citation `levihn' on page \thepage  undefined on input line 182.
+
+
+
+LaTeX Warning: Citation `kroemer' on page \thepage  undefined on input line 194
+.
+
+
+LaTeX Warning: Citation `bohg' on page \thepage  undefined on input line 194.
+
+
+Overfull \hbox (10.50896pt too wide) in paragraph at lines 200--200
 \secfnt ROTATIONALLY SYM-MET-RIC OB-JECTS 
  []
 
@@ -255,7 +331,7 @@ pdfTeX warning: /usr/bin/pdflatex (file ./images/unfolding.pdf): PDF inclusion:
 File: ./images/unfolding.pdf Graphic file (type pdf)
 
 <use ./images/unfolding.pdf>
-Overfull \hbox (4.25291pt too wide) in paragraph at lines 260--260
+Overfull \hbox (4.25291pt too wide) in paragraph at lines 319--319
 []\subsecfnt Modeling Task Con-straints in Cylin-dri-cal Space 
  []
 
@@ -274,10 +350,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 2233 strings out of 495061
- 25599 string characters out of 1182621
- 84734 words of memory out of 3000000
- 5373 multiletter control sequences out of 15000+50000
+ 2252 strings out of 495061
+ 25828 string characters out of 1182621
+ 84742 words of memory out of 3000000
+ 5392 multiletter control sequences out of 15000+50000
  54393 words of font info for 69 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  39i,10n,26p,490b,276s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -295,7 +371,7 @@ msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/
 share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-texli
 ve/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/t
 imes/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on aamas2015.pdf (7 pages, 814964 bytes).
+Output written on aamas2015.pdf (7 pages, 818988 bytes).
 PDF statistics:
  126 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
