@@ -1,0 +1,311 @@
+------------ Review -------------
+Relevance                                     : 7
+Originality and novelty                       : 4
+Significance                                  : 4
+Readability and organization                  : 7
+Technical quality and soundness               : 5
+Overall recommendation (Full Paper)           : 4
+Overall recommendation (Extended Abstract)    : 5
+Reviewer Expertise                            : 7
+Reviewer Thoroughness                         : 7
+
+-- Comments to the author(s):
+Summary of the Paper
+
+====================
+
+
+
+The paper presents a method for taking advantage of object symmetry when searching for grasp postures for a manipulator. The approach assumes a cylindrical symmetry and projects the task constraints and free regions (on a discretized object surface) onto a planar surface, essentially defining a lower dimensional manifold. Then the rotational symmetry is exploited. The idea is neat but is not well motivated, and not evaluated properly.
+
+
+
+
+
+Justification for the Scores
+
+============================
+
+
+
+- The only symmetry presented in the paper is the cylindrical symmetry (i.e., along the z axis), and the method depends too much on this assumption. While it can certainly be exploited, I don't think it will be applicable to many objects in real manipulation problems.
+
+
+
+- Experimental evaluation is almost missing. I would have liked to see at least a comparison against another popular method.
+
+
+
+- The related work section lacks the whole random sampling based and some search based motion/grasp planning literature from the recent years. There is a paper [4] cited from 2004, but there are many other recent works such as
+
+   * L. Y. Chang, S. Srinivasa, and N. Pollard, “Planning pre-grasp manipulation
+
+for transport tasks,” in ”ICRA”, 2010.
+
+   * Berenson, D.; Diankov, R.; Nishiwaki, K.; Kagami, S.; Kuffner, J., "Grasp planning in complex scenes," Humanoid Robots, 2007
+
+
+
+
+
+
+
+Constructive Comments to Improve the Paper
+
+==========================================
+
+
+
+- Section 4, paragraph 1: "as fulfills" -> "fulfills"
+
+
+
+- In line 9 of Algorithm 1, if I understood it correctly, it performs a "break" command, in which it should be passing the current run of the for loop at line 5. If it directly jumps to line 2, the loop variable <delta> will not get incremented
+
+
+
+- For evaluating the effectiveness of the proposed approach, I recommend the authors to compare their method against some popular methods, such as CHOMP and BiRRT. Alternatively, a potentially very interesting idea would be to complement an existing popular method with the proposed method, and compare the vanilla version of the existing method against the one augmented with the proposed method to show how much efficiency gain is obtained by incorporating the proposed method.
+
+
+
+
+
+Questions for Rebuttal
+
+======================
+
+
+
+- The "planning" part is essentially doing a brute force sweep over the state space. The generation of feasibility maps does a similar thing and is being called from the planning algorithm. So I wonder how scalable this approach would be. Did you do a complexity analysis?
+
+
+
+
+-- Summary:
+[Seen by the authors and (S)PC members]
+
+
+---------- End of Review ----------
+------------ Review -------------
+Relevance                                     : 7
+Originality and novelty                       : 4
+Significance                                  : 4
+Readability and organization                  : 7
+Technical quality and soundness               : 5
+Overall recommendation (Full Paper)           : 5
+Overall recommendation (Extended Abstract)    : 6
+Reviewer Expertise                            : 7
+Reviewer Thoroughness                         : 7
+
+-- Comments to the author(s):
+The manuscript investigates multi-grasp planning under task constraints using an efficient object representation that exploits rotational symmetries in objects to be grasped.
+
+First, the authors present a low-dimensional search space representation using cylindrical coordinates and efficiently build maps of feasible grasps in this space.
+
+The authors then propose (multi-)grasp planners that make use of this representation to efficiently compute grasps suitable for a sequence of tasks.
+
+
+
+As the authors already mention in their conclusion the work being reported is in an early stage. Still, the presented approach is interesting.
+
+
+
+The paper is both very well written and very well structured. Visualizations enhance the descriptions in the text. The approach is well motivated and described. Unfortunately, the authors spend too much paper space on the manifold representation not leaving enough space to the end of the paper in order to adequately describe planning on these manifold representations. Instead, the authors only provide algorithm listings without further discussions (the listing are fine though and the approach is sound). Regarding the presented examples and claims, the paper initially states "to start with a simple example", but does not introduce considerably more complex problems in the remainder.
+
+
+
+Some questions remain open:
+
+* In Sec 3.1, a central assumption is made: points with same height h on shape S end up having the same radius r(h). This assumption only holds for objects with not only rotational symmetry but also a convex shape. It does not hold for objects with rotational symmetry and concave shape. This is, however, neither mentioned in the text nor taken into account in the further derivation and description of the approach. For concave shapes, the simplified cylindrical coordinate representation fails and requires unfolding along the rotation axis z. How is this handled in the proposed approach? The authors should elaborate more on this aspect!
+
+In fact, representing a concave shape is not impossible using the proposed representation, it only changes its construction. That should be mentioned (not only in the discussion of the approach (Sec .5) where a 3rd dimension in the representation is briefly mentioned).
+
+* In Sec. 3.2.1, it is mentioned that grasps cannot be changed. Regarding the fact that the authors aim at multi-agent bi-manual manipulation tasks, possible "re-grasping" actions should at least be mentioned.
+
+* In Sec. 5, it is mentioned that the planner exploits symmetry and other shape properties. Which other properties are meant?
+
+* In Sec. 6, only a single simulation experiment is briefly mentioned together with Fig. 8. The more interesting multi-agent bi-manual manipulation from the eye-catcher in Fig. 1 is not further discussed in the paper. Overall, the experimental results are not very thorough. Other than presenting a single proof-of-concept experiment, the authors leave out more complex objects, tasks and settings.
+
+
+
+Minor issues and comments:
+
+* Fig. 6 needs a more descriptive caption that explains what exactly is visualized: "A+B=C"?
+
+* In algorithm 1: "Jump to line 2 misses incrementing theta"
+
+
+
+Typesetting and structure:
+
+* Headings on previous page/in previous column, e.g., for "2. Related Work" and "3. Manifold..."
+
+* Sec 3., 1st paragraph: "(e.g. reach-)" exceeds the column width
+
+* There is a 3.1.1 without a 3.1.2 section
+
+
+
+Following a list of typing errors/missing words/etc.
+
+* Sec 1, 2nd paragraph: "the robot needs avoid" -> "to avoid"
+
+* Sec 1, 3rd paragraph: "of the entire robot in environment" -> "in the environment"
+
+* Sec 3.1, 2nd paragraph: "onto the reference plan" -> "plane"
+
+* 3.1.1, 1st paragraph: "$p_w$ should be "$boldsymbol{p}_w$", "$p_l$ should be "$boldsymbol{p}_l$"
+
+  There is some consistency in general: some vectors are bold, others not. Matrices are also not bold. Nomenclature should be consistent!
+
+* Sec 3.2.1, 1st paragraph: ", e.g. grasp rotates around object," sounds weird, ",.e.g, grasps are rotated around the object,"?
+
+* In Sec. 3.2.1, 1st paragraph: "by rotating the gripper around the object by some theta degrees and rotating the object around itself by -theta" Shouldn't that by an "or" connecting the two? Otherwise, it is a total rotation of 2theta.
+
+  If the linked rotation of both is only done for the simplification of (4)-(6) and the proof of (3), that should be mentioned in 3.2.1 already.
+
+* Sec. 3.2.2, 3rd paragraph, "the mapping of feasibility grasps" should be "feasible grasps"
+
+* Sec. 4, 1st paragraph: "a grasp that is fulfills" should be "that fulfills"
+
+
+-- Summary:
+The paper proposes an interesting idea, but fails to convince the reader of its advantages.
+
+
+---------- End of Review ----------
+------------ Review -------------
+Relevance                                     : 7
+Originality and novelty                       : 4
+Significance                                  : 5
+Readability and organization                  : 7
+Technical quality and soundness               : 4
+Overall recommendation (Full Paper)           : 4
+Overall recommendation (Extended Abstract)    : 4
+Reviewer Expertise                            : 7
+Reviewer Thoroughness                         : 8
+
+-- Comments to the author(s):
+Summary of the Paper
+
+====================
+
+The paper is about grasp planning on rotationally symmetric objects. The core of the algorithm is unwrapping the 3D object into the 2D manifold constituted by the surface around the main axis of symmetry. To do so, the 3D coordinates of the object are transformed into 2D cylindrical coordinates. At this point, given a hand preshape and a task description, the algorithm chooses a point on the object where the wrist can be placed safely. The first step to choose a point is discretizing the plane (manifold) into a regular grid, so that the points at the center of each cell will be the only points to be analysed. The algorithm evaluates the feasibility (in terms of inverse kinematics avoiding collisions) of each cell, creating a "feasibility map", where feasible points are represented by ones and not feasible points are represented by zeros. The main point of the paper is the fact that, if the object rotates around its axis of symmetry, it is easy to update the initial feasibilit
+ y map be
+ cause it simply shifts. Therefore, the main claim is that unwrapping the 3D object into a 2D plane facilitates the update of the feasibility map. Given a number of tasks - for each of them the hand preshape is given -, the feasibility map is computed for all of them. Such feasibility maps are superimposed, so that the planner can select a wrist position that satisfies all the constraints.
+
+
+
+Justification for the Scores
+
+============================
+
+
+
+Originality and novelty: the main novelty of the paper is the idea of unwrapping a 3D rotationally symmetric object into a 2D plane to facilitate the update of the feasibility map when the object rotates around its axis of symmetry. This can be considered interesting, but it is not a new research question.
+
+Significance: the authors make a large number of assumptions that reduce the problem to a very specific one. This is the main reason why I think that their results will not be considered particularly interesting to the grasping community.
+
+Readability and Organisation: The paper is mostly readable, but contains a few typos/confusing notation/unclear arguments that can be easily fixed. I will point to some of them at the end of the review. I do not particularly like the organisation though. I find it a bit confusing.
+
+Technical quality and soundness: I did not find any error, but the work has not much technical depth.
+
+
+
+Constructive Comments to Improve the Paper
+
+==========================================
+
+The paper in general is not very precise. It is very chatty, but it lacks of formality and clarity. The authors never explain how they perform certain steps. For instance: how do they decide which parts of the objects are not feasible because of possible collisions with other objects? In other words, how do they create the red cells in Fig. 4? How do they practically check for collisions? Do they consider also the fingers or only the wrist position is considered for collisions? What algorithm do they use for inverse kinematics?
+
+
+
+The assumptions the authors make are pretty simplistic. They assume that:
+
+- the hand preshape is given;
+
+- the hand preshape is all right for all the parts of the object they are analysing, even though they admit in the conclusions that it is not very reasonable;
+
+- the task and its description is given;
+
+- the object is rotationally symmetric;
+
+- the plane formed by the two fingers of the gripper must be perpendicular to the axis of symmetry.
+
+There a lot of other works that solve much more general and difficult problems. The authors should definitely state why the simple one they are proposing is so important to solve.
+
+
+
+Since the beginning of the paper, the authors talk about foresight and task-dependent grasps. While in the introduction it looks like the authors actually do something to model task-dependent grasps, which would be very interesting, in the rest of the paper it is clear that there is no modelling at all in this sense. Actually, they never specify how they decide which hand preshape is suitable for a certain task. It looks like they do it manually. Probably the authors should slightly modify the introduction to not mislead the reviewer into thinking that they are actually working on task-dependent grasps, because that is not the focus of the paper.
+
+
+
+Same holds for the second problem that is mentioned in the introduction, i.e. the fact that usually works on grasp assume a floating hand. This is definitely true, but the authors do not mention this problem for the rest of the paper. As far as I understood (even though it is not written in the paper), the inverse kinematics is computed on the entire body of the robot, therefore they probably do not assume a floating hand. However, this is not specified anywhere. The authors should either specify it in the description of the algorithm or remove it from the introduction.
+
+
+
+In order to compute the initial feasibility map, the inverse kinematics algorithm must be computed on all the cells of the discretized manifold. The procedure must be repeated if the environment around the object changes. Usually inverse kinematics algorithms take some time. Computing them on hundreds of points is computationally demanding. However, the authors never mention how long their algorithm takes. This is a pretty important information, since the reduction of the search space (which they claim being one of the objectives of their work) is usually aimed at reducing the computational time required to find a solution.
+
+
+
+The authors write: "In this work, we demonstrate that particularly for rotationally symmetric objects, which do not have any surface protrusions or cavities, a number of grasping subproblems such as finger placements, wrist pose, and collision free inverse kinematics are simplified." The first problem I see in this statement is that they actually never take care of finger placements, as the hand preshape is given; they only look for the position of the wrist. Hence, that part should be rephrased. The second and bigger problem is that the authors never explain explicitly HOW such subproblems are simplified. I get that if the object rotates, the feasibility map simply shifts; however, the authors do not show any result that demonstrates the importance of such a property. Does that imply that their algorithm is faster than others? That it is easier to implement?
+
+
+
+Finally, the biggest issue in this paper is that there is not an experimental section. The authors do not evaluate in any way their algorithm, and they do not compare it with other methods. This is a pretty serious problem and should be addressed before publishing the paper.
+
+
+
+MINOR COMMENTS:
+
+The authors state: "the hand is assumed to be parallel to the base of the object such that the plane between the grasping fingers is perpendicular to the axis of symmetry". I understood this sentence because the hand they are using is a gripper, but this is not very clear. Probably an image would be helpful.
+
+
+
+The authors also state: "Although the locations and requirements of the tasks may vary, they all impose constraints on the same gripper-object system since once an object is picked, the grasp cannot be changed." I really did not understand what the authors was meaning here. Probably they should rephrase it.
+
+
+
+In the discussion, the authors state: "The presented planner can be seen as a first prototype of grasp planning algorithms that exploit symmetry and
+
+other shape properties." What other shape properties? I did not see any other property exploited in the paper.
+
+
+
+There are a few English errors as well as some typos:
+
+- Abstract, first sentence: in this paper, without the comma.
+
+- Introduction: the second sentence (Whether in structured environments...) does not make any sense.
+
+- Caption of Fig. 6: one of the objects moveS.
+
+- Section 4, third sentence: fulfils, drop the "is".
+
+- Discussion: The presented planner can be seen as a first prototype of grasp planning algorithms that exploitS symmetry and...
+
+- Conclusion: Since such AN object.
+
+
+
+Questions for Rebuttal
+
+======================
+
+How do the authors decide which parts of the objects are not feasible because of possible collisions with other objects? In other words, how do they create the red cells in Fig. 4? How do they practically check for collisions? Do they consider also the fingers or only the wrist position is considered for collisions? What algorithm do they use for inverse kinematics?
+
+
+
+The authors make a lot of assumptions, hence the problem is extremely specific. Why such a specific problem is so important to solve?
+
+
+
+How long does the algorithm take to find a solution? What about other methods?
+
+
+
+How the property of shifting the feasibility map is so important? What do the authors mean when they say that the presented property "simplifies" the problem?
+-- Summary:
+The paper is well written and presents the idea of exploiting the symmetry of objects to accelerate the update of the feasibility evaluation. However, the organisation is a bit confusing. I miss a fluid stream from the beginning to the end. It also lacks of information that are essential to replicate the algorithm. It also lacks of a clear statement about why the specific problem they are proposing is important to solve. Finally and most importantly, there is not an experimental section in this paper. This way it is not possible to evaluate if the method proposed in this paper is actually useful to the grasping community.
+---------- End of Review ----------
+
