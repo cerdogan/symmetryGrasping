@@ -1,24 +1,29 @@
-\documentclass{aamas2015}
+\documentclass[a4paper,10pt,twocolumn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
 \usepackage{amsmath}
-\makeatletter
-\newif\if@restonecol
-\makeatother
-\let\algorithm\relax
-\let\endalgorithm\relax
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+\newcommand{ \cbl}{\color{blue}}
+\newcommand{ \cb}{\color{black}}
 \usepackage[algoruled, vlined,linesnumbered]{algorithm2e}
 
-
-\pdfpagewidth=8.5truein
-\pdfpageheight=11truein
 
 \begin{document}
 
 \title{Exploiting Object Symmetry for Efficient Grasping}
-\numberofauthors{1}
-
 \author{
-\alignauthor
-Paper XXX
+Can Erdogan $\;\;$ Ana Huaman $\;\;$ Heni ben Amor
 }
 
 \newcommand{\vech}[1]{\textbf{#1}}
@@ -215,7 +220,7 @@ meshes from partial point clouds.
 
 %==================================================================================================
 
-\section{Manifold Representations for \\Rotationally Symmetric Objects}
+\section{Manifold Representations for Rotationally Symmetric Objects}
 
 Projecting manipulation constraints such as collisions with the environment and robot
 manipulator limitations (e.g. reachability) onto object surfaces can facilitate the search
@@ -269,7 +274,7 @@ In this work, we show that analyzing the task constraints, robot limitations and
 in this low-dimensional subspace leads to significant efficiency gains in grasp planning.
 
 %==================================================================================================
-\subsubsection{Mapping Euclidean Coordinates to a \\Cylindrical Coordinate System}
+\subsubsection{Mapping Euclidean Coordinates to a Cylindrical Coordinate System}
 
 To reason about tasks traditionally expressed in Euclidean coordinates, we introduce a mapping 
 between the representation of a point in the Euclidean world frame, $p_w$, to the $\vech{x} = [h,\theta]^T$
@@ -352,7 +357,7 @@ be efficiently updated when the object is rotated around its axis of symmetry. M
 
 %==================================================================================================
 %\newpage
-\subsubsection{Extrapolating Task Constraints to new \\Object Rotations}
+\subsubsection{Extrapolating Task Constraints to new Object Rotations}
 The analysis of grasp feasibility for a given object pose and task description can be utilized to reason
 about grasp selection if the object is rotated only around its axis of symmetry. The idea is that the 
 coupling between the rotation of the grasp around the object pose and the rotation of the object around
@@ -489,9 +494,9 @@ check for collisions and reachability.
   \KwResult{$M$: Binary 2D array with feasibility indicators}
   \For{$h \leftarrow \hat{h}$ \KwTo $\check{h}$} {
     \For{$\theta \leftarrow \hat{\theta}$ \KwTo $\check{\theta}$} {
-      $p^l \leftarrow [r cos(\theta), r sin(\theta), h]^T;$ \tcp*[f]{\small Inverse mapping\normal}\\
-      $p^w \leftarrow W.objectPose() * p^l$; \tcp*[f]{\small Goal wrist pose \normal} \\
-      \For(\tcp*[f]{\small Sample redundancy \normal}){$\phi \leftarrow 0$ \KwTo $2 \pi$} {
+      $p^l \leftarrow [r cos(\theta), r sin(\theta), h]^T;$ \tcp*[f]{ Inverse mapping}\\
+      $p^w \leftarrow W.objectPose() * p^l$; \tcp*[f]{ Goal wrist pose } \\
+      \For(\tcp*[f]{ Sample redundancy }){$\phi \leftarrow 0$ \KwTo $2 \pi$} {
 	$R.analyticalIK(W.objectPose(), p^w, \phi);$ \\
 	\If{W.collisionFree()} {
 	  $M[(h-\hat{h})/\delta h][(\theta-\hat{\theta})/\delta \theta] \leftarrow 1;$ \\
@@ -535,15 +540,15 @@ Figure 6 demonstrates the shifting of feasibility maps over each other to find p
   $\{\delta h, \delta \theta\}$: increments, $R$: robot, $W$: world,
   \\ \hspace{3.5em}$\mathbb{T}$: object poses for tasks}
   \KwResult{$\{h,\theta\}$: grasp pose, $\delta_i$: task rotations }
-  \For(\tcp*[f]{\small Generate maps for each task \normal}){$T \in \mathbb{T}$, $i \leftarrow 0$} {
+  \For(\tcp*[f]{ Generate maps for each task }){$T \in \mathbb{T}$, $i \leftarrow 0$} {
     $W.setObjectPose(T)$; \\
     $M[i] = $CreateMap$(\hat{h}, \check{h}, \hat{\theta}, \check{\theta}, R, W);$\\
     $i \leftarrow i + 1$; 
   }
   
-  \For(\tcp*[f]{\small Iterate through object height\normal}){$h \leftarrow \hat{h}$ \KwTo $\check{h}$} {
+  \For(\tcp*[f]{ Iterate through object height}){$h \leftarrow \hat{h}$ \KwTo $\check{h}$} {
     $\theta^* \leftarrow -1$; \\
-    \For(\tcp*[f]{\small Find grasp pose on 1st object\normal}){$\theta \leftarrow \hat{\theta}$ \KwTo $\check{\theta}$} {
+    \For(\tcp*[f]{ Find grasp pose on 1st object}){$\theta \leftarrow \hat{\theta}$ \KwTo $\check{\theta}$} {
       \If{$M[(h-\hat{h})/\delta h][(\theta-\hat{\theta})/\delta \theta] = 1$} {
 	$\theta^* \leftarrow \theta;$ \\ 
 	\textbf{break;} \\
@@ -555,7 +560,7 @@ Figure 6 demonstrates the shifting of feasibility maps over each other to find p
       \BlankLine
       \BlankLine
     $foundAll \leftarrow true;$ \\
-    \For(\tcp*[f]{\small Find grasps for each task\normal}){$T \in \mathbb{T}$, $i \leftarrow 0$} {
+    \For(\tcp*[f]{ Find grasps for each task}){$T \in \mathbb{T}$, $i \leftarrow 0$} {
       \For{$\theta \leftarrow \hat{\theta}$ \KwTo $\check{\theta}$} {
 	\If{$M[(h-\hat{h})/\delta h][(\theta-\hat{\theta})/\delta \theta] = 1$} {
 	$\mathbb{\delta}_i \leftarrow \theta - \theta^*;$ \\ 
@@ -593,26 +598,26 @@ further away from each other as can be seen on the right hand side of Figure 7. 
   \\ \hspace{3.5em} $\mathbb{H}$: hand prints}
   \KwResult{$\{h_i, \theta_i\}$: grasp poses for each robot}
   
-  \For(\tcp*[f]{\small Generate maps for each robot \normal}){$R \in \mathbb{R}$, $i \leftarrow 0$} {
+  \For(\tcp*[f]{ Generate maps for each robot }){$R \in \mathbb{R}$, $i \leftarrow 0$} {
     $M[i] = $CreateMap$(\hat{h}, \check{h}, \hat{\theta}, \check{\theta}, R, W);$\\
     $i \leftarrow i + 1$; 
   }
   
   \For{$restart \leftarrow 0$ \KwTo MAX\_RESTARTS} {
   \BlankLine
-    \For(\tcp*[f]{\small Sample contacts \normal}){robot $R \in \mathbb{R}$, $i \leftarrow 0$} {
+    \For(\tcp*[f]{ Sample contacts }){robot $R \in \mathbb{R}$, $i \leftarrow 0$} {
       $[h_i, \theta_i] \leftarrow random(\hat{h}, \check{h}, \hat{\theta}, \check{\theta}, \delta h, \delta \theta);$ \\
       $i \leftarrow i + 1$;\\ 
     }
     \BlankLine
-    \tcp{\small Minimize collisions by moving random grasp\normal}
+    \tcp{ Minimize collisions by moving random grasp}
     \For{$iters \leftarrow 0$ \KwTo MAX\_ITERS} {  
       
-      \tcp{\small Stop if all the grasps are collision free\normal}
+      \tcp{ Stop if all the grasps are collision free}
       \lIf{$W.collisionFree()$} \textbf{return } $\{h_i, \theta_i\}$;\\ 
       \BlankLine
       
-      $R \leftarrow \mathbb{R}[random()]$;  \tcp*[f]{\small Choose random robot\normal}\\
+      $R \leftarrow \mathbb{R}[random()]$;  \tcp*[f]{ Choose random robot}\\
       $dirs \leftarrow [\{\delta h,0\}, \{0, \delta \theta\}, \{-\delta h, 0\}, \{0, -\delta \theta\}]$; \\
       
       $minNumColls \leftarrow \infty, ~ bestDir \leftarrow \emptyset; $ \\
@@ -629,7 +634,7 @@ further away from each other as can be seen on the right hand side of Figure 7. 
 	}
       }
       
-      \tcp{\small Update grasp with minimum collision direction\normal}
+      \tcp{ Update grasp with minimum collision direction}
       $h^* \leftarrow h_R + dir[0], ~\theta^* \leftarrow \theta_R + dir[1];$ \\
       $h_r \leftarrow h^*, \theta_r \leftarrow \theta^*$;
       
@@ -723,5 +728,5 @@ to generate low-dimensional grasp representations.
 In this paper we presented a grasp planning algorithm
 that exploits rotational symmetries for generating task-constrained grasps. One of the major results is presented in Figure 8 where a sequence of tasks have been considered to compute a single grasp that satisfies all of their constraints. The algorithm is particularly suited for grasp planning with several subtasks or several interacting agents. The key insight of the paper is that re-occurring patterns in the geometry of shapes can be exploited to drastically reduce the space of solutions. To this end, we introduced a low-dimensional, object-centered representation for grasp planning which is based on rotational symmetries. Since such object are symmetric, any stable grasp can be rotated around the axis yielding a family of feasible grasps. We presented early results showing that this property allows us to generate multiple grasps around an object, which is useful for bi-manual tasks and cooperative robot hand over tasks.         
 \bibliographystyle{plain}
-\bibliography{aamas2015}
+\bibliography{draft}
 \end{document}ibi
